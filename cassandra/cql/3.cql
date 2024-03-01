@@ -1,3 +1,5 @@
+-- Example from "Cassandra: The Definitive Guide" Chapter 3
+
 // DESCRIBE CLUSTER;
 
 // SHOW VERSION;
