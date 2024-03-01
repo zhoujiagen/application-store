@@ -1,0 +1,19 @@
+version: '3'
+services:
+  envoy-db-proxy:
+    container_name: envoy-db-proxy
+    image: envoyproxy/envoy:contrib-v1.28.0
+    ports:
+      - "8001:8001"     # envoy admin
+      - "17017:27017"   # MongoDB
+    # restart: always
+    volumes:
+      - ./envoy.yaml:/etc/envoy/envoy.yaml
+      - ./mongodb.access_log:/etc/envoy/mongodb.access_log
+    networks:
+      - devops-network
+
+networks:
+  devops-network:
+    external: true
+
