@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  cassandra:
+    # https://hub.docker.com/_/cassandra
+    image: cassandra
+    container_name: cassandra
+    volumes:
+      - ./data:/var/lib/cassandra
+      # https://cassandra.apache.org/doc/latest/cassandra/managing/configuration/cass_yaml_file.html
+      - ./cassandra.yaml:/etc/cassandra/cassandra.yaml
+      - ./cassandra-env.sh:/etc/cassandra/cassandra-env.sh
+    ports:
+      # storage_port: 7000
+      # ssl_storage_port: 7001
+      # native_transport_port: 9042
+      # Thrift: 9160
+      # JMX: 7199
+      - 17000:7000
+      - 17001:7001
+      - 19042:9042
+      - 19160:9160
+      - 17199:7199
+    networks:
+      - cassandra-network
+    environment:
+      - LOCAL_JMX=yes
+    healthcheck:
+      test: ["CMD-SHELL", "[ $$(nodetool statusgossip) = running ]"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+networks:
+  cassandra-network:
+    external: true
