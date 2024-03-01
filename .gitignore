@@ -1,0 +1,15 @@
+# airflow
+airflow/logs/*
+!airflow/mysql/data/.gitkeep
+!airflow/mysql/data/metadata_invalid_done_sorted.txt
+
+__pycache__
+
+airflow/mysql/data/*
+!airflow/mysql/data/.gitkeep
+
+## DAGS
+airflow/dags/core/*
+airflow/dags/ex_mongodb*
+airflow/dags/qa/*
+airflow/dags/prod/*
