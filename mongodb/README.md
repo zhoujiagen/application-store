@@ -170,3 +170,73 @@ admin> db.createUser({user: "root", pwd: "root", roles:[{role: "root", db: "admi
 ```shell
 docker compose -f mongo-docker-compose.yml restart mongo-express
 ``` -->
+
+## Stats
+
+
+Description: Get stats information on MongoDB databases and collections.
+
+See: [How can I check the size of a collection?](https://www.mongodb.com/docs/manual/faq/storage/#how-can-i-check-the-size-of-a-collection-)
+
+```shell
+# set MongoDB username and password in stats.sh
+
+$ chmod +x stats.sh
+$ python3 stats.py
+```
+
+## WiredTiger command-line tool: `wt`
+
+Resources:
+
+- Code: https://github.com/wiredtiger/wiredtiger/
+- WiredTiger command line utility
+  - Make: https://source.wiredtiger.com/10.0.0/command_line.html
+  - CMake: https://source.wiredtiger.com/11.2.0/build-posix.html
+
+Percona WiredTiger Docs:
+
+- [WiredTiger File Forensics Part 1: Building “wt”](https://www.percona.com/blog/wiredtiger-file-forensics-part-1-building-wt/)
+- [WiredTiger File Forensics Part 2: wt dump](https://www.percona.com/blog/2021/05/18/wiredtiger-file-forensics-part-2-wt-dump/)
+- [WiredTiger File Forensics Part 3: Viewing all the MongoDB Data](https://www.percona.com/blog/wiredtiger-file-forensics-part-3-viewing-all-the-mongodb-data/)
+
+```shell
+root@localhost:.../_data# cat WiredTiger
+WiredTiger
+WiredTiger 10.0.2: (December 21, 2021)
+```
+
+Build from source:
+
+```shell
+mkdir build && cd build
+# -DENABLE_SNAPPY=1 
+cmake -DCMAKE_INSTALL_PREFIX=/mnt/bakcup/wiredtiger/bin -DHAVE_BUILTIN_EXTENSION_SNAPPY=1 ../.
+make install
+
+alias wtiger="/mnt/bakcup/wiredtiger/wiredtiger/build/wt"
+```
+
+Inspect WiredTiger files:
+
+```shell
+# catalog
+wtiger dump -x table:_mdb_catalog | tail -n +7 | awk 'NR%2 == 0 { print }' | xxd -r -p | bsondump --quiet | jq -r 'select(. | has("md")) | [.ident, .ns] | @tsv' | sort
+
+# dump a collection file (here collection-74--xxx.wt) and convert its values to a plain BSON file
+wtiger dump -x  collection-74--xxx.wt | tail -n +7 | awk 'NR%2 == 0 { print }' | xxd -r -p | bsondump --quiet
+```
+
+Example: Dump collection file
+
+```shell
+wtiger dump -x  file:collection-64--xxx.wt | tail -n +7 | awk 'NR%2 == 0 { print }' | xxd -r -p | bsondump --quiet
+```
+
+Example: Collection file checksum errors
+
+```shell
+wtiger dump -x  file:collection-74--xxx.wt | tail -n +7 | awk 'NR%2 == 0 { print }' | xxd -r -p | bsondump --quiet
+[1700820260:969080][2434743:0x7f9a64d26740], wt, file:collection-74--xxx.wt, WT_SESSION.open_cursor: [WT_VERB_DEFAULT][ERROR]: __wt_block_read_off, 222: collection-74--xxx.wt: potential hardware corruption, read checksum error for 421888B block at offset 554386894848: block header checksum of 0xdc29ea30 doesn't match expected checksum of 0xbff11038
+...
+```
