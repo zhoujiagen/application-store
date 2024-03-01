@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  mongo:
+    container_name: mongo
+    image: mongo:6.0.1
+    restart: always
+    ports:
+      - '27017:27017'
+    networks:
+      - devops-network
+    environment:
+      - "MONGO_INITDB_ROOT_USERNAME=root" # DEPLOY_ENV
+      - "MONGO_INITDB_ROOT_PASSWORD=root" # DEPLOY_ENV
+    volumes:
+      - "./data/db:/data/db"
+      - "./backup:/tmp/mongo-backup"
+      # - "./security.keyFile:/data/security.keyFile"
+    entrypoint:
+      - "/usr/bin/mongod"
+      - "--auth"
+      - "--bind_ip_all"
+      # - "--keyFile"
+      # - "/data/security.keyFile"
+
+  # mongo-express:
+  #   container_name: mongo-express
+  #   image: mongo-express:1.0.0-alpha.4
+  #   restart: always
+  #   ports:
+  #     - '27018:8081'
+  #   networks:
+  #     - devops-network
+  #   environment:
+  #     - "ME_CONFIG_MONGODB_SERVER=mongo"
+  #     - "ME_CONFIG_MONGODB_ADMINUSERNAME=root" # DEPLOY_ENV
+  #     - "ME_CONFIG_MONGODB_ADMINPASSWORD=root" # DEPLOY_ENV
+  #     - "ME_CONFIG_MONGODB_URL: mongodb://root:root@mongo:27017/" # DEPLOY_ENV
+  #   depends_on:
+  #     - mongo
+
+networks:
+  devops-network:
+    external: true

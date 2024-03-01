@@ -1,0 +1,181 @@
+version: '3'
+
+x-cfgsvr-common:
+  &cfgsvr-common
+  image: "${MONGODB_IMAGE}"
+  command: "mongod --port 27017 --configsvr --replSet ${CFGSVR_REPLSET} ${KEYFILE_ARG}"
+  networks:
+    - mongodb-network
+  logging:
+    driver: json-file
+    options:
+      max-size: "1g"
+      max-file: "10"
+  restart: unless-stopped
+  healthcheck:
+    test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+    interval: 5m
+    timeout: 10s
+    retries: 3
+    start_period: 1m
+  deploy:
+    resources:
+      limits:
+        cpus: "${CFGSVR_RESOURCE_LIMITS_CPU}"
+        memory: "${CFGSVR_RESOURCE_LIMITS_MEM}"
+      reservations:
+        cpus: "${CFGSVR_RESOURCE_RESERVATIONS_CPU}"
+        memory: "${CFGSVR_RESOURCE_RESERVATIONS_MEM}"
+
+
+x-shardsvr-common:
+  &shardsvr-common
+  image: "${MONGODB_IMAGE}"
+  command: "mongod --quiet --port 27017 --shardsvr --replSet ${SHARDSVR_REPLSET} ${KEYFILE_ARG}"
+  networks:
+    - mongodb-network
+  logging:
+    driver: json-file
+    options:
+      max-size: "1g"
+      max-file: "10"
+  restart: unless-stopped
+  healthcheck:
+    test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+    interval: 5m
+    timeout: 10s
+    retries: 3
+    start_period: 1m
+  deploy:
+    resources:
+      limits:
+        cpus: "${SHARDSVR_RESOURCE_LIMITS_CPU}"
+        memory: "${SHARDSVR_RESOURCE_LIMITS_MEM}"
+      reservations:
+        cpus: "${SHARDSVR_RESOURCE_RESERVATIONS_CPU}"
+        memory: "${SHARDSVR_RESOURCE_RESERVATIONS_MEM}"
+
+services:
+  mongos:
+    image: "${MONGODB_IMAGE}"
+    labels:
+      com.ethahe.env: prod
+      com.ethahe.artifact.type: mongos
+      com.ethahe.artifact.id: mongos
+    container_name: mongos
+    command: "mongos --quiet --port 27017 --configdb ${CFGSVR_REPLSET}/mongodb-cfgsvr01:27017,mongodb-cfgsvr02:27017,mongodb-cfgsvr03:27017 --bind_ip_all ${KEYFILE_ARG}"
+    volumes:
+      - ./mongod.conf:/etc/mongo/mongod.conf
+      - ./scripts:/scripts 
+      - ./mongodb-keyfile:/data/mongodb-keyfile
+      - "${MONGOS_DB}:/data/db"
+      - "${MONGOS_CONFIGDB}:/data/configdb"
+    ports:
+      - 27017:27017
+    networks:
+      - mongodb-network
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "${MONGOS_RESOURCE_LIMITS_CPU}"
+          memory: "${MONGOS_RESOURCE_LIMITS_MEM}"
+        reservations:
+          cpus: "${MONGOS_RESOURCE_RESERVATIONS_CPU}"
+          memory: "${MONGOS_RESOURCE_RESERVATIONS_MEM}"
+    depends_on:
+      - mongodb-cfgsvr01
+      - mongodb-cfgsvr02
+      - mongodb-cfgsvr03
+      - mongodb-shardsvr01
+      - mongodb-shardsvr02
+      - mongodb-shardsvr03
+
+  mongodb-cfgsvr01:
+    <<: *cfgsvr-common
+    labels:
+      com.ethahe.env: prod
+      com.ethahe.artifact.type: mongodb-cfgsvr
+      com.ethahe.artifact.id: mongodb-cfgsvr01
+    container_name: mongodb-cfgsvr01
+    volumes:
+      - ./mongod.conf:/etc/mongo/mongod.conf
+      - ./scripts:/scripts
+      - ./mongodb-keyfile:/data/mongodb-keyfile
+      - "${CFGSVR01_DB}:/data/db"
+      - "${CFGSVR01_CONFIGDB}:/data/configdb"
+
+  mongodb-cfgsvr02:
+    <<: *cfgsvr-common
+    labels:
+      com.ethahe.env: prod
+      com.ethahe.artifact.type: mongodb-cfgsvr
+      com.ethahe.artifact.id: mongodb-cfgsvr02
+    container_name: mongodb-cfgsvr02
+    volumes:
+      - ./mongod.conf:/etc/mongo/mongod.conf
+      - ./scripts:/scripts 
+      - ./mongodb-keyfile:/data/mongodb-keyfile
+      - "${CFGSVR02_DB}:/data/db"
+      - "${CFGSVR02_CONFIGDB}:/data/configdb"
+
+  mongodb-cfgsvr03:
+    <<: *cfgsvr-common
+    labels:
+      com.ethahe.env: prod
+      com.ethahe.artifact.type: mongodb-cfgsvr
+      com.ethahe.artifact.id: mongodb-cfgsvr03
+    container_name: mongodb-cfgsvr03
+    volumes:
+      - ./mongod.conf:/etc/mongo/mongod.conf
+      - ./scripts:/scripts 
+      - ./mongodb-keyfile:/data/mongodb-keyfile
+      - "${CFGSVR03_DB}:/data/db"
+      - "${CFGSVR03_CONFIGDB}:/data/configdb"
+
+  mongodb-shardsvr01:
+    <<: *shardsvr-common
+    labels:
+      com.ethahe.env: prod
+      com.ethahe.artifact.type: mongodb-shardsvr
+      com.ethahe.artifact.id: mongodb-shardsvr01
+    container_name: mongodb-shardsvr01
+    volumes:
+      - ./mongod.conf:/etc/mongo/mongod.conf
+      - ./scripts:/scripts
+      - ./mongodb-keyfile:/data/mongodb-keyfile
+      - "${SHARDSVR01_DB}:/data/db"
+      - "${SHARDSVR01_CONFIGDB}:/data/configdb"
+
+  mongodb-shardsvr02:
+    <<: *shardsvr-common
+    labels:
+      com.ethahe.env: prod
+      com.ethahe.artifact.type: mongodb-shardsvr
+      com.ethahe.artifact.id: mongodb-shardsvr02
+    container_name: mongodb-shardsvr02
+    volumes:
+      - ./mongod.conf:/etc/mongo/mongod.conf
+      - ./scripts:/scripts
+      - ./mongodb-keyfile:/data/mongodb-keyfile
+      - "${SHARDSVR02_DB}:/data/db"
+      - "${SHARDSVR02_CONFIGDB}:/data/configdb"
+
+  mongodb-shardsvr03:
+    <<: *shardsvr-common
+    labels:
+      com.ethahe.env: prod
+      com.ethahe.artifact.type: mongodb-shardsvr
+      com.ethahe.artifact.id: mongodb-shardsvr03
+    container_name: mongodb-shardsvr03
+    volumes:
+      - ./mongod.conf:/etc/mongo/mongod.conf
+      - ./scripts:/scripts
+      - ./mongodb-keyfile:/data/mongodb-keyfile
+      - "${SHARDSVR03_DB}:/data/db"
+      - "${SHARDSVR03_CONFIGDB}:/data/configdb"
+
+networks:
+  mongodb-network:
+    name: 'mongodb-network'
+    external: true
