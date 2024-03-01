@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    restart: "always"
+    environment:  # DEPLOY_ENV
+      MYSQL_ROOT_PASSWORD: devops+mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./conf:/etc/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+      start_period: 0s
+    networks:
+      - devops-network
+
+  mysql-repl:
+    image: mysql:5.7
+    container_name: mysql-repl
+    restart: "always"
+    environment:  # DEPLOY_ENV
+      MYSQL_ROOT_PASSWORD: devops+mysql
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./repl/data:/var/lib/mysql
+      - ./repl/conf:/etc/mysql
+    networks:
+      - devops-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+      start_period: 0s
+    depends_on:
+      - mysql
+
+networks:
+  devops-network:
+    external: true

@@ -17,3 +17,10 @@ airflow/dags/prod/*
 # cassandra
 cassandra/data/*
 !cassandra/data/.gitkeep
+
+# archery
+
+# mysql
+
+mysql/data/*
+!mysql/data/.gitkeep
