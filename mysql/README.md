@@ -134,3 +134,80 @@ mysql> CHANGE MASTER TO
     MASTER_LOG_POS = 9581;
 mysql> START SLAVE;
 ```
+
+## Slow log
+
+```ini
+[mysqld]
+# Logs
+log_output=TABLE,FILE
+slow_query_log=ON
+slow_query_log_file=/var/lib/mysql/slow_query.log
+long_query_time=1
+```
+
+```sql
+-- system variables
+show variables like 'long%';
+
+-- SHOW CREATE TABLE mysql.slow_log;
+SELECT event_time, CAST(argument AS CHAR) as arg FROM mysql.general_log;
+SELECT start_time, CAST(sql_text AS CHAR) as sql_text FROM mysql.slow_log;
+
+-- mock long queries
+SELECT sleep(3), 'hello';
+```
+
+## TPCC
+
+```sql
+CREATE SCHEMA `test` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin ;
+```
+
+```shell
+# https://github.com/Percona-Lab/sysbench-tpcc
+# https://github.com/akopytov/sysbench
+
+# (1) Prepare data and tables
+./tpcc.lua \
+--db-driver=mysql \
+--mysql-user=root \
+--mysql_password=devops+mysql \
+--mysql-db=test \
+--mysql-host=127.0.0.1 \
+--mysql-port=3306 \
+--time=300 --threads=10 --report-interval=1 --tables=1 --scale=100 \
+prepare
+
+# (2) Run
+./tpcc.lua \
+--db-driver=mysql \
+--mysql-user=root \
+--mysql_password=devops+mysql \
+--mysql-db=test \
+--mysql-host=127.0.0.1 \
+--mysql-port=3306 \
+--time=300 --threads=10 --report-interval=1 --tables=1 --scale=100 \
+run
+
+# (3) Cleanup
+./tpcc.lua \
+--db-driver=mysql \
+--mysql-user=root \
+--mysql_password=devops+mysql \
+--mysql-db=test \
+--mysql-host=127.0.0.1 \
+--mysql-port=3306 \
+--time=300 --threads=10 --report-interval=1 --tables=1 --scale=100 \
+cleanup
+```
+
+## Tuning
+
+
+```ini
+innodb_buffer_pool_size
+join_buffer_size
+sort_buffer_size
+innodb_sort_buffer_size
+```
