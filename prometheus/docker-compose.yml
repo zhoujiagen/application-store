@@ -1,0 +1,54 @@
+version: "3.8"
+services:  
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports: # DEPLOY_ENV
+      - 19090:9090
+    command:
+      # https://prometheus.io/docs/prometheus/latest/command-line/prometheus/
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --web.config.file=/etc/prometheus/prometheus-web.yml
+      - --storage.tsdb.retention.size=5GB
+      - --storage.tsdb.retention.time=15d
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./prometheus-web.yml:/etc/prometheus/prometheus-web.yml:ro
+      - ./prometheus-rules.yml:/etc/prometheus/prometheus-rules.yml:ro
+      - ./prometheus-data:/prometheus
+    networks:
+      - apm-network
+    # depends_on:
+    #   - cadvisor
+
+  prometheus-alertmanager:
+    image: quay.io/prometheus/alertmanager
+    container_name: prometheus-alertmanager
+    ports: # DEPLOY_ENV
+      - 19093:9093
+    command:
+      - --config.file=/etc/prometheus/alertmanager.yml
+    volumes:
+      - ./prometheus-alertmanager.yml:/etc/prometheus/alertmanager.yml
+      - ./prometheus-alertmanager-data:/alertmanager/data
+    networks:
+      - apm-network
+    depends_on:
+      - prometheus
+
+  grafana:
+    image: grafana/grafana-oss
+    container_name: grafana
+    restart: unless-stopped
+    ports: # DEPLOY_ENV
+     - 13000:3000
+    volumes:
+      - ./grafana-data:/var/lib/grafana
+    networks:
+      - apm-network
+    depends_on:
+      - prometheus
+
+networks:
+  apm-network:
+    external: true

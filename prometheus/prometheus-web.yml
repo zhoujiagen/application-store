@@ -1,0 +1,4 @@
+# https://prometheus.io/docs/guides/basic-auth/
+# DEPLOY_ENV
+basic_auth_users:
+    admin: xxx

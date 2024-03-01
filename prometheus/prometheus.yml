@@ -1,0 +1,87 @@
+# https://prometheus.io/docs/prometheus/latest/configuration/configuration/
+global:
+  scrape_interval: 1m
+  scrape_timeout: 10s
+  evaluation_interval: 1m
+
+# DEPLOY_ENV
+scrape_configs:
+  - job_name: cadvisor
+    scrape_interval: 10s
+    static_configs:
+      - targets:
+        - cadvisor:8080
+
+  - job_name: node
+    static_configs:
+      - targets: 
+        - 127.0.0.1:19100
+
+  - job_name: mysql_exporter_targets
+    params:
+      # Not required. Will match value to child in config file. Default value is `client`.
+      # DEPLOY_ENV
+      auth_module: [client.servers.app]
+    static_configs:
+      - targets:
+        # All mysql hostnames or unix sockets to monitor.
+        - 127.0.0.1:3306
+        # - unix:///run/mysqld/mysqld.sock
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        # The mysqld_exporter host:port
+        replacement: 127.0.0.1:19104
+
+  - job_name: redis_exporter_targets
+    static_configs:
+      - targets:
+        - redis://127.0.0.1:6379
+    metrics_path: /scrape
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: 127.0.0.1:19121
+
+  - job_name: mongodb_exporter_targets
+    scrape_interval: 5m
+    static_configs:
+      - targets:
+        - 127.0.0.1:19216
+
+  - job_name: mongodb_exporter_mongos
+    scrape_interval: 5m
+    metrics_path: /scrape
+    params:
+      target: [mongodb://mongos:27017]
+    static_configs:
+      - targets:
+        - 127.0.0.1:9216
+
+  - job_name: elasticsearch_exporter_targets
+    static_configs:
+      - targets:
+        - 127.0.0.1:19114
+
+  # https://github.com/knyar/nginx-lua-prometheus
+  # https://grafana.com/grafana/dashboards/10223-nginx-lua/
+  # - job_name: nginx-lua-prometheus
+  #   static_configs:
+  #     - targets:
+  #       - 127.0.0.2:19145
+  #   metrics_path: /metrics
+
+rule_files:
+  - /etc/prometheus/prometheus-rules.yml
+
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+       - 127.0.0.1:19093

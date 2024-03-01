@@ -1,0 +1,29 @@
+
+version: "3.8"
+
+x-mongodb-exporter-common:
+  &mongodb-exporter-common
+  image: percona/mongodb_exporter:0.40
+  restart: unless-stopped
+  networks:
+    - apm-network
+    - mongodb-network
+
+services:
+  mongodb_exporter:
+    <<: *mongodb-exporter-common
+    container_name: mongodb_exporter
+    command: # DEPLOY_ENV
+      - --compatible-mode
+      - --collect-all
+      - --mongodb.uri=${MONGODB_URIs}
+    ports: # DEPLOY_ENV
+      - ${EXPORTER_PORT1}
+      - ${EXPORTER_PORT2}
+
+networks:
+  mongodb-network:
+    external: true
+  apm-network:
+    external: true
+      

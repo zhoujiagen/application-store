@@ -1,0 +1,27 @@
+# https://prometheus.io/docs/alerting/latest/configuration/
+global:
+  resolve_timeout: 5m
+  # DEPLOY_ENV
+  # Slac workspace: XXX, App: Alerting
+  slack_api_url: 'https://hooks.slack.com/services/xxx/xxx/xxx'
+
+route:
+  receiver: slack_receiver
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 4h
+  group_by: [instance]
+
+receivers:
+  # for testing purpose
+  # - name: webhook_receiver
+  #   webhook_configs:
+  #     - url: 'https://webhook.site/c1db0235-1509-4923-89ee-01e5d5c87051'
+  #       send_resolved: false
+  - name: slack_receiver
+    slack_configs:
+      - send_resolved: false
+        channel: '#alert'
+        title: "{{ range .Alerts }}{{ .Annotations.summary }}\n{{ end }}"
+        # DEPLOY_ENV
+        text: "{{ range .Alerts }}{{ .Annotations.description }}\nName: {{ .Labels.alertname }}\nInstance: {{ .Labels.instance }}\nStartAt: {{ .StartsAt }}\nURL: http://xxx:19093/\nFingerprint: {{ .Fingerprint }}\n\n{{ end }}"

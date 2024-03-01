@@ -1,0 +1,78 @@
+version: "3.8"
+services:  
+  # Usually on application machines.
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.47.2
+    container_name: cadvisor
+    ports: # DEPLOY_ENV
+      - 18080:8080
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    privileged: true
+    devices:
+      - "/dev/kmsg"
+    networks:
+      - apm-network
+#    depends_on:
+#      - redis
+
+  # Prometheus: mysqld-exporter
+  mysqld-exporter:
+    image: prom/mysqld-exporter
+    container_name: mysqld-exporter
+    restart: unless-stopped
+    volumes: # DEPLOY_ENV
+      - ./mysqld_exporter.config.my-conf:/bin/config.my-cnf
+    command:
+      - --config.my-cnf=/bin/config.my-cnf
+    ports: # DEPLOY_ENV
+      - 19104:9104
+    networks:
+      - apm-network
+  
+  # Prometheus: redis_exporter
+  redis_exporter:
+    image: oliver006/redis_exporter
+    container_name: redis_exporter
+    restart: unless-stopped
+    ports: # DEPLOY_ENV
+      - 19121:9121
+    networks:
+      - apm-network
+
+  # Prometheus: mongodb_exporter
+  mongodb_exporter:
+    image: percona/mongodb_exporter:0.40
+    container_name: mongodb_exporter_test
+    restart: unless-stopped
+    command: # DEPLOY_ENV
+      - --compatible-mode
+      - --collect-all
+      - --mongodb.uri=mongodb://root:root@127.0.0.1:27017
+    ports: # DEPLOY_ENV
+      - 19216:9216
+      - 17001:17001
+    networks:
+      - apm-network
+
+  # Prometheus: elasticsearch_exporter
+  elasticsearch_exporter_mon:
+    image: quay.io/prometheuscommunity/elasticsearch-exporter:latest
+    container_name: elasticsearch_exporter_mon
+    command:
+      - --es.uri=http://apm:xxx@127.0.0.1:19200
+      # '--help'
+      - --es.all
+    restart: unless-stopped
+    ports:
+      - 19114:9114
+    networks:
+      - apm-network
+
+networks:
+  apm-network:
+    external: true

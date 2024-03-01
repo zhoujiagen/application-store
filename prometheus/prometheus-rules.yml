@@ -1,0 +1,24 @@
+# https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/
+# https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/
+# DEPLOY_ENV
+groups:
+  - name: NodeExportAlert
+    rules:
+      - alert: DiskUsageAlert
+        expr: max((node_filesystem_size_bytes{fstype=~"ext.?|xfs"}-node_filesystem_free_bytes{fstype=~"ext.?|xfs"}) *100/(node_filesystem_avail_bytes {fstype=~"ext.?|xfs"}+(node_filesystem_size_bytes{fstype=~"ext.?|xfs"}-node_filesystem_free_bytes{fstype=~"ext.?|xfs"})))by(instance,mountpoint) > 70
+        for: 1m
+        annotations:
+          summary: "Instance {{ $labels.instance }} {{ $labels.mountpoint }} Disk Usage High"
+          description: "Disk usage high, above 70% (current value: {{ $value }})"
+      - alert: CpuAlert
+        expr: (1 - avg(rate(node_cpu_seconds_total{mode="idle"}[1m])) by (instance)) * 100 > 70
+        for: 1m
+        annotations:
+          summary: "Instance {{ $labels.instance }} CPU Usage High"
+          description: "CPU usage high, above 70% (current value: {{ $value }})"
+      # - alert: MemoryUsageAlert
+      #   expr: (1 - (node_memory_MemAvailable_bytes{} / (node_memory_MemTotal_bytes{})))* 100 > 70
+      #   for: 1m
+      #   annotations:
+      #     summary: "Instance {{ $labels.instance }} Memory Usage High"
+      #     description: "Memory usage high, above 70% (current value: {{ $value }})"      
