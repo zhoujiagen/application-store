@@ -6,3 +6,4 @@ Collections of setup scripts and demonstration examples for applications.
 - [Archery](./archery/README.md)
 - [Envoy](./envoy/README.md)
 - [MySQL](./mysql/README.md)
+- [Redis](./redis/README.md)

@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  redis:
+    container_name: crawler-redis
+    restart: "no"
+    image: redis:7
+    volumes:
+      - "./data:/data"
+      - "./redis.conf:/etc/redis/redis.conf"
+    ports:
+      - "6379:6379"
+    command:
+      - /etc/redis/redis.conf
+    networks:
+      - devops-network
+    privileged: true
+
+networks:
+  devops-network:
+    external: true
