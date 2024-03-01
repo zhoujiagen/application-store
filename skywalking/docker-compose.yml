@@ -1,0 +1,37 @@
+version: "3.8"
+services:
+  skywalking-oap-server:
+    image: apache/skywalking-oap-server:9.0.0
+    container_name: skywalking-oap-server
+    restart: always
+    volumes:
+      - ./mysql-connector-java-5.1.49.jar:/skywalking/oap-libs/mysql-connector-java-5.1.49.jar
+    ports: # DEPLOY_ENV
+      - 11800:11800
+      - 12800:12800
+    networks:
+      - apm-network 
+    environment: # DEPLOY_ENV
+      - "JAVA_OPTS=-Xms256m -Xms256m"
+      - "SW_STORAGE=mysql"
+      - "SW_JDBC_URL=jdbc:mysql://localhost:3306/skywalking?rewriteBatchedStatements=true&allowMultiQueries=true"
+      - "SW_DATA_SOURCE_USER=root"
+      - "SW_DATA_SOURCE_PASSWORD=devops+mysql"
+
+  skywalking-ui:
+    image: apache/skywalking-ui:9.0.0
+    container_name: skywalking-ui
+    restart: always
+    ports: # DEPLOY_ENV
+      - 18080:8080
+    networks:
+      - apm-network 
+    environment: # DEPLOY_ENV
+      - "JAVA_OPTS=-Xms128m -Xms128m"
+      - "SW_OAP_ADDRESS=http://skywalking-oap-server:12800"
+    depends_on:
+      - skywalking-oap-server
+
+networks:
+  apm-network:
+    external: true
