@@ -1,0 +1,73 @@
+version: '3.8'
+
+x-member-common:
+  &member-common
+  image: hazelcast/hazelcast:5.3.6
+  restart: "always"
+  # network_mode: host
+  networks:
+    - devops-network
+
+services:
+  hz-mem1:
+    <<: *member-common
+    container_name: hz-mem1
+    environment:
+      HAZELCAST_CONFIG: "${HAZELCAST_CONFIG}"
+      HZ_CLUSTERNAME: "${HZ_CLUSTERNAME}"
+      HZ_NETWORK_PUBLICADDRESS: "${HZ_NETWORK_PUBLICADDRESS}:5701"
+      JAVA_OPTS: "${JAVA_OPTS}"
+    ports:
+      - "${HZ_NETWORK_PUBLICADDRESS}:5701:5701" # DEPLOY_ENV
+    volumes:
+      # /opt/hazelcast/config/hazelcast-docker.xml
+      - ./hazelcast-mem1.xml:/opt/hazelcast/config/hazelcast.xml
+      - ./log4j2.properties:/opt/hazelcast/config/log4j2.properties
+    healthcheck:
+      test: ["CMD", "hz-cli", "cluster", "-t", "${HZ_CLUSTERNAME}@${HZ_NETWORK_PUBLICADDRESS}:5701"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+      start_period: 0s
+  hz-mem2:
+    <<: *member-common
+    container_name: hz-mem2
+    environment:
+      HAZELCAST_CONFIG: "${HAZELCAST_CONFIG}"
+      HZ_CLUSTERNAME: "${HZ_CLUSTERNAME}"
+      HZ_NETWORK_PUBLICADDRESS: "${HZ_NETWORK_PUBLICADDRESS}:5702"
+      JAVA_OPTS: "${JAVA_OPTS}"
+    ports:
+      - "${HZ_NETWORK_PUBLICADDRESS}:5702:5701" # DEPLOY_ENV
+    volumes:
+      # /opt/hazelcast/config/hazelcast-docker.xml
+      - ./hazelcast-mem2.xml:/opt/hazelcast/config/hazelcast.xml
+      - ./log4j2.properties:/opt/hazelcast/config/log4j2.properties
+    healthcheck:
+      test: ["CMD", "hz-cli", "cluster", "-t", "${HZ_CLUSTERNAME}@${HZ_NETWORK_PUBLICADDRESS}:5702"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+      start_period: 0s
+
+  hz-manager:
+    image: hazelcast/management-center:5.3.3
+    container_name: hz-manager
+    restart: "always"
+    ports:
+      - "18080:8080" # DEPLOY_ENV
+    networks:
+      - devops-network
+    healthcheck:
+      test: ["CMD", "/opt/hazelcast/management-center/bin/hz-mc", "-V"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+      start_period: 0s
+    depends_on:
+      - hz-mem1
+      - hz-mem2
+
+networks:
+  devops-network:
+    external: true
