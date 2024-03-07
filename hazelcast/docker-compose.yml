@@ -23,6 +23,7 @@ services:
       # /opt/hazelcast/config/hazelcast-docker.xml
       - ./hazelcast-mem1.xml:/opt/hazelcast/config/hazelcast.xml
       - ./log4j2.properties:/opt/hazelcast/config/log4j2.properties
+      - ./codes:/opt/hazelcast/apps # DEPLOY_ENV
     healthcheck:
       test: ["CMD", "hz-cli", "cluster", "-t", "${HZ_CLUSTERNAME}@${HZ_NETWORK_PUBLICADDRESS}:5701"]
       interval: 5s
@@ -67,6 +68,28 @@ services:
     depends_on:
       - hz-mem1
       - hz-mem2
+
+  hz-debezium-mysql:
+    image: debezium/example-mysql:1.2
+    container_name: hz-debezium-mysql
+    restart: "always"
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+    ports:
+      - "3306:3306" # DEPLOY_ENV
+    # volumes:
+      # - ./data/mysql/data:/var/lib/mysql
+      # - ./data/mysql/conf:/etc/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+      start_period: 0s
+    networks:
+      - devops-network
 
 networks:
   devops-network:

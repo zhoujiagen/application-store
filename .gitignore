@@ -16,6 +16,10 @@ cassandra/data/*
 
 # archery
 
+# hazelcast
+hazelcast/data/mysql/data/*
+!hazelcast/data/mysql/data/.gitkeep
+
 # mysql
 
 mysql/data/*
