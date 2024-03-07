@@ -1,0 +1,23 @@
+# https://www.openpolicyagent.org/docs/latest/configuration/
+# https://sangkeon.github.io/opaguide/chap7/integrations.html
+services:
+  example: 
+    url: http://localhost:8181/policy/v1
+    response_header_timeout_seconds: 5
+
+lables:
+  region: dev
+  service: example
+  environment: dev
+
+status:
+  service: example
+
+decision_logs:
+  service: example
+  reporting:
+    min_delay_seconds: 300
+    max_delay_seconds: 600
+  console: true
+
+persistence_directory: /var/opa

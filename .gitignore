@@ -5,6 +5,7 @@ airflow/mysql/data/*
 !airflow/mysql/data/.gitkeep
 
 __pycache__
+.ipynb_checkpoints
 
 ## DAGS
 airflow/dags/*

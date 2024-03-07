@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  opa-server:
+    image: openpolicyagent/opa
+    container_name: opa-server
+    restart: "always"
+    # --set status.service=opa-server
+    command: run --server --log-level debug --config-file /opa-config.yaml /opa-examples/example.rego
+    ports:
+      - 8181:8181
+    volumes:
+      - ./examples:/opa-examples
+      - ./opa-config.yaml:/opa-config.yaml
+    networks:
+      - devops-network
+
+networks:
+  devops-network:
+    external: true

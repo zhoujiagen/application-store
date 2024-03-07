@@ -12,5 +12,6 @@ Collections of setup scripts and demonstration examples for applications.
 - [Hazelcast](./hazelcast/README.md)
 - [MongoDB](./mongodb/README.md)
 - [MySQL](./mysql/README.md)
+- [OPA: Open Policy Agent](./opa/README.md)
 - [Prometheus](./prometheus/README.md)
 - [Redis](./redis/README.md)
