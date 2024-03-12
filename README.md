@@ -9,6 +9,7 @@ Collections of setup scripts and demonstration examples for applications.
 - [Archery](./archery/README.md)
 - [ELK](./elk/README.md): Elasticsearch, FileBeat, Kibana
 - [Envoy](./envoy/README.md)
+- [Flask](./flask/README.md)
 - [Hazelcast](./hazelcast/README.md)
 - [MongoDB](./mongodb/README.md)
 - [MySQL](./mysql/README.md)
