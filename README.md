@@ -11,6 +11,7 @@ Collections of setup scripts and demonstration examples for applications.
 - [Envoy](./envoy/README.md)
 - [Flask](./flask/README.md)
 - [Hazelcast](./hazelcast/README.md)
+- [Keycloak](./keycloak/README.md)
 - [MongoDB](./mongodb/README.md)
 - [MySQL](./mysql/README.md)
 - [OPA: Open Policy Agent](./opa/README.md)
