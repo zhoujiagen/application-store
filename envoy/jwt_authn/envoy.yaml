@@ -26,7 +26,7 @@ static_resources:
               providers:
                 jwt_provider:
                   issuer: "http://localhost:18080/realms/envoy" # same in Keycloak OpenID Connect Configuration
-                  #forward: true
+                  forward_payload_header: x-jwt-payload
                   remote_jwks:
                     http_uri: # DEPLOY_ENV ip
                       #uri: "http://192.168.3.131:18080/realms/envoy/protocol/openid-connect/certs"
