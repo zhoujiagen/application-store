@@ -1,0 +1,35 @@
+version: '3'
+
+# An example from 'Envoy in action' from book 'Istio in Action'.
+services:
+  envoy:
+    image: envoyproxy/envoy:v1.28.0
+    container_name: envoy
+    ports: 
+      - "15001:15001" # httpbin listener
+      - "8001:8001" # admin
+    volumes:
+      - ./envoy.yaml:/etc/envoy/envoy.yaml
+    networks:
+      - devops-network
+
+  envoy-httpbin:
+    image: citizenstig/httpbin
+    container_name: envoy-httpbin
+    # ports:
+    #   - "8000:8000"
+    # restart: always
+    networks:
+      - devops-network
+
+  # envoy-curl:
+  #   image: curlimages/curl
+  #   container_name: envoy-curl
+  #   command: "tail -f /dev/null"
+  #   networks:
+  #     - devops-network
+
+networks:
+  devops-network:
+    external: true
+

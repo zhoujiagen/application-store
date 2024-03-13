@@ -1,3 +1,5 @@
+.vscode/
+
 # airflow
 airflow/logs/*
 !airflow/logs/.gitkeep
@@ -21,7 +23,14 @@ cassandra/data/*
 hazelcast/data/mysql/data/*
 !hazelcast/data/mysql/data/.gitkeep
 
-# mysql
+# keycloak
+keycloak/data/mysql/*
+!keycloak/data/mysql/.gitkeep
+keycloak/codes/
 
+# mysql
 mysql/data/*
 !mysql/data/.gitkeep
+
+mysql/8/data/*
+!mysql/8/data/.gitkeep

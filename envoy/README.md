@@ -1,1 +1,113 @@
 # Envoy
+
+Access Envoy Admin `http://localhost:8001/`.
+
+## Database
+
+Proxying MongoDB.
+
+## httpbin
+
+Access httpbin `http://localhost:15001/` to view endpoints list.
+
+Use image `curlimages/curl`:
+
+```shell
+$ docker exec -it envoy-curl sh
+```
+
+Directly access `envoy-httpbin`:
+
+```shell
+$ curl envoy-httpbin:8000/headers
+{
+  "headers": {
+    "Accept": "*/*",
+    "Host": "envoy-httpbin:8000",
+    "User-Agent": "curl/8.6.0"
+  }
+}
+```
+
+Use proxy `envoy` to access `envou-httpbin`:
+
+```shell
+$ curl envoy:15001/headers
+{
+  "headers": {
+    "Accept": "*/*",
+    "Host": "envoy-httpbin",
+    "User-Agent": "curl/8.6.0",
+    "X-Envoy-Expected-Rq-Timeout-Ms": "15000",
+    "X-Request-Id": "3aa4bbdd-c413-4efe-bcfc-26f3d0e84b3a"
+  }
+}
+```
+
+Cleanup:
+
+```shell
+$ docker compose down --rmi "all"
+[+] Running 6/6
+ ✔ Container envoy                   Removed
+ ✔ Container envoy-httpbin           Removed
+ ✔ Container envoy-curl              Removed
+ ✔ Image envoyproxy/envoy:v1.28.0    Removed
+ ✔ Image citizenstig/httpbin:latest  Removed
+ ✔ Image curlimages/curl:latest      Removed
+```
+
+## JWT Authentication
+
+Provider: Keycloak
+
+- Realm: envoy
+  - OpenID Endpoint Configuration: http://localhost:18080/realms/envoy/.well-known/openid-configuration
+- User: envoy/envoy
+- Client: envoy-service
+
+
+```shell
+$ curl -s -X POST http://localhost:18080/realms/envoy/protocol/openid-connect/token   -d "client_id=envoy-service&username=envoy&password=envoy&grant_type=password"
+{
+  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJqU1lEV3VGWGhjcERQeEhNOUJUS3Q4c3JPNUYtaFNiMGhHdkRjTVRfZXYwIn0.eyJleHAiOjE3MTAzMjQ0OTQsImlhdCI6MTcxMDMyNDE5NCwianRpIjoiNTc5ZmVlMDgtZGIzNi00NDc2LWFhYmUtNWJhZTIyNmNjNmQ0IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDoxODA4MC9yZWFsbXMvZW52b3kiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYjcwMTRhZWYtZGY0NC00MTk4LWFhNTItMDYwMGY0ZTg1MzBkIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiZW52b3ktc2VydmljZSIsInNlc3Npb25fc3RhdGUiOiJlMjM0MmU0NS1jYTI1LTQ4N2MtYWI4Yy1hZGQxZGU4NTQzYzIiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIi8qIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtZW52b3kiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsInNpZCI6ImUyMzQyZTQ1LWNhMjUtNDg3Yy1hYjhjLWFkZDFkZTg1NDNjMiIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoiZW52b3kifQ.2eZd8wBh1QKQZTjX2R3Lq6FTJosXNyhG3xnU3OrDu_sLVxdaSXrgGoJ5SFlodnBK2fzsBNcetHzO6wK2XnJck3x04QePtvzReF059Prgq1-nHONK9j1SPS_6mO-39LNj2qT-BfldsNDg6UViwFUGMJSFumFsNT5kL5t88t-96h52VoMHIrSUeyvBbQoWMv3JIP9SPBQ1-tSAlrUxu5HtYxshEovI1IYa3Pk8ltOmWEUxbRAJyNq63HnFNdVF65SnBX4JMpCGN7OOaMR8eZdcd2oNwW3DXtoxep-cPulqdRT1t55SkZiWouEL7KHFgdBUkvr6YaijA3jBkbslvkS10Q",
+  "expires_in": 300,
+  "refresh_expires_in": 1800,
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIyYzk4MzdmYi1lMTM4LTQ2NzgtOWYxMC04YjcyNWY5ZTU4NjkifQ.eyJleHAiOjE3MTAzMjU5OTQsImlhdCI6MTcxMDMyNDE5NCwianRpIjoiZjIxZWVmNDQtODRhMS00YTBkLTkxMzMtM2RhZDM3YmMwN2Q4IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDoxODA4MC9yZWFsbXMvZW52b3kiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjE4MDgwL3JlYWxtcy9lbnZveSIsInN1YiI6ImI3MDE0YWVmLWRmNDQtNDE5OC1hYTUyLTA2MDBmNGU4NTMwZCIsInR5cCI6IlJlZnJlc2giLCJhenAiOiJlbnZveS1zZXJ2aWNlIiwic2Vzc2lvbl9zdGF0ZSI6ImUyMzQyZTQ1LWNhMjUtNDg3Yy1hYjhjLWFkZDFkZTg1NDNjMiIsInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsInNpZCI6ImUyMzQyZTQ1LWNhMjUtNDg3Yy1hYjhjLWFkZDFkZTg1NDNjMiJ9.r5ChuLL9tohV7UbadqAj_SkB0SCONXCc6z7b44Nt9oQ",
+  "token_type": "Bearer",
+  "not-before-policy": 0,
+  "session_state": "e2342e45-ca25-487c-ab8c-add1de8543c2",
+  "scope": "email profile"
+}
+```
+
+```shell
+$ curl http://localhost:15001/headers
+Jwt is missing
+
+$ curl http://localhost:15001/headers -H "Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJqU1lEV3VGWGhjcERQeEhNOUJUS3Q4c3JPNUYtaFNiMGhHdkRjTVRfZXYwIn0.eyJleHAiOjE3MTAzMjQ0OTQsImlhdCI6MTcxMDMyNDE5NCwianRpIjoiNTc5ZmVlMDgtZGIzNi00NDc2LWFhYmUtNWJhZTIyNmNjNmQ0IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDoxODA4MC9yZWFsbXMvZW52b3kiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYjcwMTRhZWYtZGY0NC00MTk4LWFhNTItMDYwMGY0ZTg1MzBkIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiZW52b3ktc2VydmljZSIsInNlc3Npb25fc3RhdGUiOiJlMjM0MmU0NS1jYTI1LTQ4N2MtYWI4Yy1hZGQxZGU4NTQzYzIiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIi8qIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtZW52b3kiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsInNpZCI6ImUyMzQyZTQ1LWNhMjUtNDg3Yy1hYjhjLWFkZDFkZTg1NDNjMiIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoiZW52b3kifQ.2eZd8wBh1QKQZTjX2R3Lq6FTJosXNyhG3xnU3OrDu_sLVxdaSXrgGoJ5SFlodnBK2fzsBNcetHzO6wK2XnJck3x04QePtvzReF059Prgq1-nHONK9j1SPS_6mO-39LNj2qT-BfldsNDg6UViwFUGMJSFumFsNT5kL5t88t-96h52VoMHIrSUeyvBbQoWMv3JIP9SPBQ1-tSAlrUxu5HtYxshEovI1IYa3Pk8ltOmWEUxbRAJyNq63HnFNdVF65SnBX4JMpCGN7OOaMR8eZdcd2oNwW3DXtoxep-cPulqdRT1t55SkZiWouEL7KHFgdBUkvr6YaijA3jBkbslvkS10Q"
+Jwt is expired
+
+$ curl -s -X POST http: //localhost:18080/realms/envoy/protocol/openid-connect/token   -d "client_id=envoy-service&username=envoy&password=envoy&grant_type=password"
+{
+  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJqU1lEV3VGWGhjcERQeEhNOUJUS3Q4c3JPNUYtaFNiMGhHdkRjTVRfZXYwIn0.eyJleHAiOjE3MTAzMjU1NTYsImlhdCI6MTcxMDMyNTI1NiwianRpIjoiNjZiNWRiOWUtZDczNS00OGFiLWJiNmQtOWVmNDUzMDcxZTBjIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDoxODA4MC9yZWFsbXMvZW52b3kiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYjcwMTRhZWYtZGY0NC00MTk4LWFhNTItMDYwMGY0ZTg1MzBkIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiZW52b3ktc2VydmljZSIsInNlc3Npb25fc3RhdGUiOiJhMWE5NTUyOC04ODY1LTQxMDktYjRhMS02MzA1MmNjZWExZTYiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIi8qIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtZW52b3kiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsInNpZCI6ImExYTk1NTI4LTg4NjUtNDEwOS1iNGExLTYzMDUyY2NlYTFlNiIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoiZW52b3kifQ.QR5mpe75LZXlw9kJ2rWh81i4_DiMdAHjDE6kDDG_Th5bscwGHsuOVFadAyUhbWsZAu8UAqmIyrcTo3R6W3nAkgobPgD4V5Z8D_wWuBIj-hOS_s5-4i78VS_QgOMtP1nBSPz5jBuoiR7a2eSZWrap1bhcmW2wWf9UXeDK60s6ymc2MGnjQFeA49v3F-clsIqZZDS7EM3uE06RpPGyeTfYVWhhcQGvyyZ8-4QQ-_4tcsNNnysqREr-cqHymNEBWWMNgZNOvBj3Q_vYh7BxLaPRMC5laNEJgtn-TothBAYrHmnak7rIb_6iW7EzwOc8p8vf8g27Qq2yHVEb4NSYO6KhFQ",
+  "expires_in": 300,
+  "refresh_expires_in": 1800,
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIyYzk4MzdmYi1lMTM4LTQ2NzgtOWYxMC04YjcyNWY5ZTU4NjkifQ.eyJleHAiOjE3MTAzMjcwNTYsImlhdCI6MTcxMDMyNTI1NiwianRpIjoiZWJjNzQ4MmItYzc4Ni00ZTNjLWE4ZGYtY2MxMTYxYzE3NzJkIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDoxODA4MC9yZWFsbXMvZW52b3kiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjE4MDgwL3JlYWxtcy9lbnZveSIsInN1YiI6ImI3MDE0YWVmLWRmNDQtNDE5OC1hYTUyLTA2MDBmNGU4NTMwZCIsInR5cCI6IlJlZnJlc2giLCJhenAiOiJlbnZveS1zZXJ2aWNlIiwic2Vzc2lvbl9zdGF0ZSI6ImExYTk1NTI4LTg4NjUtNDEwOS1iNGExLTYzMDUyY2NlYTFlNiIsInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsInNpZCI6ImExYTk1NTI4LTg4NjUtNDEwOS1iNGExLTYzMDUyY2NlYTFlNiJ9.d2u1dnBPtlJRzfN7dJOkEbqFerFhHzZr0T0uXMKycmw",
+  "token_type": "Bearer",
+  "not-before-policy": 0,
+  "session_state": "a1a95528-8865-4109-b4a1-63052ccea1e6",
+  "scope": "email profile"
+}
+
+$ curl http://localhost:15001/headers -H "Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJqU1lEV3VGWGhjcERQeEhNOUJUS3Q4c3JPNUYtaFNiMGhHdkRjTVRfZXYwIn0.eyJleHAiOjE3MTAzMjU1NTYsImlhdCI6MTcxMDMyNTI1NiwianRpIjoiNjZiNWRiOWUtZDczNS00OGFiLWJiNmQtOWVmNDUzMDcxZTBjIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDoxODA4MC9yZWFsbXMvZW52b3kiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYjcwMTRhZWYtZGY0NC00MTk4LWFhNTItMDYwMGY0ZTg1MzBkIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiZW52b3ktc2VydmljZSIsInNlc3Npb25fc3RhdGUiOiJhMWE5NTUyOC04ODY1LTQxMDktYjRhMS02MzA1MmNjZWExZTYiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIi8qIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtZW52b3kiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsInNpZCI6ImExYTk1NTI4LTg4NjUtNDEwOS1iNGExLTYzMDUyY2NlYTFlNiIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoiZW52b3kifQ.QR5mpe75LZXlw9kJ2rWh81i4_DiMdAHjDE6kDDG_Th5bscwGHsuOVFadAyUhbWsZAu8UAqmIyrcTo3R6W3nAkgobPgD4V5Z8D_wWuBIj-hOS_s5-4i78VS_QgOMtP1nBSPz5jBuoiR7a2eSZWrap1bhcmW2wWf9UXeDK60s6ymc2MGnjQFeA49v3F-clsIqZZDS7EM3uE06RpPGyeTfYVWhhcQGvyyZ8-4QQ-_4tcsNNnysqREr-cqHymNEBWWMNgZNOvBj3Q_vYh7BxLaPRMC5laNEJgtn-TothBAYrHmnak7rIb_6iW7EzwOc8p8vf8g27Qq2yHVEb4NSYO6KhFQ"
+{
+  "headers": {
+    "Accept": "*/*",
+    "Host": "envoy-httpbin",
+    "User-Agent": "curl/8.2.1",
+    "X-Envoy-Expected-Rq-Timeout-Ms": "15000",
+    "X-Request-Id": "204f6f87-8b23-417e-b65a-770669a77b5f"
+  }
+}
+```
