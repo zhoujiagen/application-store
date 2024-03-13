@@ -1,5 +1,7 @@
 # MySQL
 
+- Docker: https://hub.docker.com/_/mysql
+
 Initialize directory and files:
 
 ```shell
@@ -210,4 +212,17 @@ innodb_buffer_pool_size
 join_buffer_size
 sort_buffer_size
 innodb_sort_buffer_size
+```
+
+## Version 8
+
+```shell
+bash-4.4# mysql -u root -p
+mysql> select version();
++-----------+
+| version() |
++-----------+
+| 8.0.36    |
++-----------+
+1 row in set (0.00 sec)
 ```
