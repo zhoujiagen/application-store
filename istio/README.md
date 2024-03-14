@@ -138,3 +138,113 @@ http://localhost:20001/kiali
 # generate payload
 for i in $(seq 1 100); do curl -s -o /dev/null "http://localhost/productpage"; done
 ```
+
+5. Cleanup
+
+```shell
+$ kubectl delete -f samples/addons/
+serviceaccount "grafana" deleted
+configmap "grafana" deleted
+service "grafana" deleted
+deployment.apps "grafana" deleted
+configmap "istio-grafana-dashboards" deleted
+configmap "istio-services-grafana-dashboards" deleted
+deployment.apps "jaeger" deleted
+service "tracing" deleted
+service "zipkin" deleted
+service "jaeger-collector" deleted
+serviceaccount "kiali" deleted
+configmap "kiali" deleted
+clusterrole.rbac.authorization.k8s.io "kiali-viewer" deleted
+clusterrole.rbac.authorization.k8s.io "kiali" deleted
+clusterrolebinding.rbac.authorization.k8s.io "kiali" deleted
+role.rbac.authorization.k8s.io "kiali-controlplane" deleted
+rolebinding.rbac.authorization.k8s.io "kiali-controlplane" deleted
+service "kiali" deleted
+deployment.apps "kiali" deleted
+serviceaccount "loki" deleted
+configmap "loki" deleted
+configmap "loki-runtime" deleted
+service "loki-memberlist" deleted
+service "loki-headless" deleted
+service "loki" deleted
+statefulset.apps "loki" deleted
+serviceaccount "prometheus" deleted
+configmap "prometheus" deleted
+clusterrole.rbac.authorization.k8s.io "prometheus" deleted
+clusterrolebinding.rbac.authorization.k8s.io "prometheus" deleted
+service "prometheus" deleted
+deployment.apps "prometheus" deleted
+
+$  bin/istioctl.exe uninstall -y --purge
+All Istio resources will be pruned from the cluster
+
+  Removed IstioOperator:istio-system:installed-state.
+  Removed Deployment:istio-system:istio-egressgateway.
+  Removed Deployment:istio-system:istio-ingressgateway.
+  Removed Deployment:istio-system:istiod.
+  Removed Service:istio-system:istio-egressgateway.
+  Removed Service:istio-system:istio-ingressgateway.
+  Removed Service:istio-system:istiod.
+  Removed ConfigMap:istio-system:istio.
+  Removed ConfigMap:istio-system:istio-sidecar-injector.
+  Removed Pod:istio-system:istio-egressgateway-687cb674fc-4djmj.
+  Removed Pod:istio-system:istio-ingressgateway-85c5875ff7-dplpw.
+  Removed Pod:istio-system:istiod-7fb4d64fb6-5tw6p.
+  Removed ServiceAccount:istio-system:istio-egressgateway-service-account.
+  Removed ServiceAccount:istio-system:istio-ingressgateway-service-account.
+  Removed ServiceAccount:istio-system:istio-reader-service-account.
+  Removed ServiceAccount:istio-system:istiod.
+  Removed RoleBinding:istio-system:istio-egressgateway-sds.
+  Removed RoleBinding:istio-system:istio-ingressgateway-sds.
+  Removed RoleBinding:istio-system:istiod.
+  Removed Role:istio-system:istio-egressgateway-sds.
+  Removed Role:istio-system:istio-ingressgateway-sds.
+  Removed Role:istio-system:istiod.
+  Removed PodDisruptionBudget:istio-system:istio-egressgateway.
+  Removed PodDisruptionBudget:istio-system:istio-ingressgateway.
+  Removed PodDisruptionBudget:istio-system:istiod.
+  Removed MutatingWebhookConfiguration::istio-revision-tag-default.
+  Removed MutatingWebhookConfiguration::istio-sidecar-injector.
+  Removed ValidatingWebhookConfiguration::istio-validator-istio-system.
+  Removed ValidatingWebhookConfiguration::istiod-default-validator.
+  Removed ClusterRole::istio-reader-clusterrole-istio-system.
+  Removed ClusterRole::istiod-clusterrole-istio-system.
+  Removed ClusterRole::istiod-gateway-controller-istio-system.
+  Removed ClusterRoleBinding::istio-reader-clusterrole-istio-system.
+  Removed ClusterRoleBinding::istiod-clusterrole-istio-system.
+  Removed ClusterRoleBinding::istiod-gateway-controller-istio-system.
+  Removed CustomResourceDefinition::authorizationpolicies.security.istio.io.
+  Removed CustomResourceDefinition::destinationrules.networking.istio.io.
+  Removed CustomResourceDefinition::envoyfilters.networking.istio.io.
+  Removed CustomResourceDefinition::gateways.networking.istio.io.
+  Removed CustomResourceDefinition::istiooperators.install.istio.io.
+  Removed CustomResourceDefinition::peerauthentications.security.istio.io.
+  Removed CustomResourceDefinition::proxyconfigs.networking.istio.io.
+  Removed CustomResourceDefinition::requestauthentications.security.istio.io.
+  Removed CustomResourceDefinition::serviceentries.networking.istio.io.
+  Removed CustomResourceDefinition::sidecars.networking.istio.io.
+  Removed CustomResourceDefinition::telemetries.telemetry.istio.io.
+  Removed CustomResourceDefinition::virtualservices.networking.istio.io.
+  Removed CustomResourceDefinition::wasmplugins.extensions.istio.io.
+  Removed CustomResourceDefinition::workloadentries.networking.istio.io.
+  Removed CustomResourceDefinition::workloadgroups.networking.istio.io.
+✔ Uninstall complete                       
+
+$ kubectl delete namespace istio-system
+namespace "istio-system" deleted
+
+$ kubectl describe ns devops
+Name:         devops
+Labels:       istio-injection=enabled
+              kubernetes.io/metadata.name=devops
+Annotations:  <none>
+Status:       Active
+
+No resource quota.
+
+No LimitRange resource.
+
+$ kubectl label namespace devops istio-injection-
+namespace/devops unlabeled
+```
