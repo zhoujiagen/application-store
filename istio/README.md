@@ -142,6 +142,24 @@ for i in $(seq 1 100); do curl -s -o /dev/null "http://localhost/productpage"; d
 5. Cleanup
 
 ```shell
+$ kubectl -n devops delete -f samples/bookinfo/networking/bookinfo-gateway.yaml
+$ kubectl -n devops delete -f samples/bookinfo/platform/kube/bookinfo.yaml
+service "details" deleted
+serviceaccount "bookinfo-details" deleted
+deployment.apps "details-v1" deleted
+service "ratings" deleted
+serviceaccount "bookinfo-ratings" deleted
+deployment.apps "ratings-v1" deleted
+service "reviews" deleted
+serviceaccount "bookinfo-reviews" deleted
+deployment.apps "reviews-v1" deleted
+deployment.apps "reviews-v2" deleted
+deployment.apps "reviews-v3" deleted
+service "productpage" deleted
+serviceaccount "bookinfo-productpage" deleted
+deployment.apps "productpage-v1" deleted
+
+
 $ kubectl delete -f samples/addons/
 serviceaccount "grafana" deleted
 configmap "grafana" deleted
@@ -176,7 +194,7 @@ clusterrolebinding.rbac.authorization.k8s.io "prometheus" deleted
 service "prometheus" deleted
 deployment.apps "prometheus" deleted
 
-$  bin/istioctl.exe uninstall -y --purge
+$ bin/istioctl.exe uninstall -y --purge
 All Istio resources will be pruned from the cluster
 
   Removed IstioOperator:istio-system:installed-state.
@@ -247,4 +265,7 @@ No LimitRange resource.
 
 $ kubectl label namespace devops istio-injection-
 namespace/devops unlabeled
+
+$ kubectl delete ns devops
+namespace "devops" deleted
 ```
