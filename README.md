@@ -29,3 +29,4 @@ Applications:
 - [OPA: Open Policy Agent](./opa/README.md)
 - [Prometheus](./prometheus/README.md)
 - [Redis](./redis/README.md)
+- [SQLite](./sqlite/README.md)

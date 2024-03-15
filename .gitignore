@@ -37,3 +37,7 @@ mysql/data/*
 
 mysql/8/data/*
 !mysql/8/data/.gitkeep
+
+# sqlite
+sqlite/data/*
+!sqlite/data/.gitkeep

@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  sqlite-web:
+    image: coleifer/sqlite-web
+    container_name: sqlite-web
+    environment:
+      - SQLITE_DATABASE=tools.db
+    restart: "always"
+    ports:
+      - "18080:8080"
+    volumes:
+      - ./data:/data
+    networks:
+      - devops-network
+
+networks:
+  devops-network:
+    external: true
