@@ -21,6 +21,7 @@ Applications:
 - [ELK](./elk/README.md): Elasticsearch, FileBeat, Kibana
 - [Envoy](./envoy/README.md)
 - [Flask](./flask/README.md)
+- [Fortio](./fortio/README.md)
 - [Hazelcast](./hazelcast/README.md)
 - [Istio](./istio/README.md)
 - [Keycloak](./keycloak/README.md)

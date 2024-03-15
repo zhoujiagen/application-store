@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  fortio-server:
+    image: fortio/fortio:1.63.4
+    container_name: fortio-server
+    restart: "always"
+    ports:
+      - "18080:8080"
+      - "18079:8079"
+    command: ["server", "-config-dir", "/etc/fortio"]
+    networks:
+      - devops-network
+
+  fortio-loader:
+    image: fortio/fortio:1.63.4
+    container_name: fortio-loader
+    env_file:
+      - .env
+    restart: "no"
+    entrypoint: ["/usr/bin/fortio"]
+    # command: ["help"]
+    command:  ["load", "${COMMAND_LOAD_URL}"]
+    networks:
+      - devops-network
+
+networks:
+  devops-network:
+    external: true

@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  flask-demo:
+    image: devops/flask-demo
+    container_name: flask-demo
+    restart: "always"
+    entrypoint: ["flask"]
+    command: ["--app", "main", "run", "--host", "0.0.0.0", "--port", "5000"]
+    ports:
+      - "5001:5000"
+    networks:
+      - devops-network
+
+networks:
+  devops-network:
+    external: true

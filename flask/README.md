@@ -42,3 +42,12 @@ $ curl http://127.0.0.1:5000/user -H "Accept: application/json"
   "name": "Example User"
 }
 ```
+
+## Dockerize
+
+- [DockerHub - python](https://hub.docker.com/_/python)
+- [Docker examples - Flask](https://docs.docker.com/samples/flask/)
+
+```shell
+$ docker build -t devops/flask-demo .
+```
