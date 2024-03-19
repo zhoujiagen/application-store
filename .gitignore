@@ -19,6 +19,13 @@ cassandra/data/*
 
 # archery
 
+# harbor
+harbor/harbor-offline-installer-v2.10.1.tgz
+harbor/harbor/*
+!harbor/harbor/certs/.gitkeep
+!harbor/harbor/harbor.yml
+!harbor/harbor/docker-compose.yml
+
 # hazelcast
 hazelcast/data/mysql/data/*
 !hazelcast/data/mysql/data/.gitkeep

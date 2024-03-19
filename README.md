@@ -22,6 +22,7 @@ Applications:
 - [Envoy](./envoy/README.md)
 - [Flask](./flask/README.md)
 - [Fortio](./fortio/README.md)
+- [Harbor](./harbor/README.md)
 - [Hazelcast](./hazelcast/README.md)
 - [Istio](./istio/README.md)
 - [Keycloak](./keycloak/README.md)
