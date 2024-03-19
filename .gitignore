@@ -1,5 +1,9 @@
 .vscode/
 
+# activemq
+activemq/data/*
+!activemq/data/.gitkeep
+
 # airflow
 airflow/logs/*
 !airflow/logs/.gitkeep
@@ -33,6 +37,10 @@ hazelcast/data/mysql/data/*
 # istio
 istio/istio-1.20.3/
 
+# kafka
+kafka/data/*
+!kafka/data/.gitkeep
+
 # keycloak
 keycloak/data/mysql/*
 !keycloak/data/mysql/.gitkeep
@@ -44,6 +52,11 @@ mysql/data/*
 
 mysql/8/data/*
 !mysql/8/data/.gitkeep
+
+# postgresql
+postgresql/data/*
+postgresql/pgadmin/*
+!postgresql/pgadmin/.gitkeep
 
 # sqlite
 sqlite/data/*

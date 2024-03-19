@@ -16,6 +16,7 @@ Applications:
 
 - [Apache Airflow](./airflow/README.md)
 - [Apache Cassandra](./cassandra/README.md)
+- [Apache Kafka](./kafka/README.md)
 - [Apache Skywalking](./skywalking/README.md)
 - [Archery](./archery/README.md)
 - [ELK](./elk/README.md): Elasticsearch, FileBeat, Kibana
@@ -29,6 +30,7 @@ Applications:
 - [MongoDB](./mongodb/README.md)
 - [MySQL](./mysql/README.md)
 - [OPA: Open Policy Agent](./opa/README.md)
+- [PostgreSQL](./postgresql/README.md)
 - [Prometheus](./prometheus/README.md)
 - [Redis](./redis/README.md)
 - [SQLite](./sqlite/README.md)
