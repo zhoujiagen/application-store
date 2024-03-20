@@ -266,6 +266,6 @@ No LimitRange resource.
 $ kubectl label namespace devops istio-injection-
 namespace/devops unlabeled
 
-$ kubectl delete ns devops
+$ kubectl delete ns devops
 namespace "devops" deleted
 ```
