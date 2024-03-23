@@ -28,6 +28,7 @@ Applications:
 - [Hazelcast](./hazelcast/README.md)
 - [Istio](./istio/README.md)
 - [Keycloak](./keycloak/README.md)
+- [MailHog](./mailhog/README.md)
 - [MongoDB](./mongodb/README.md)
 - [MySQL](./mysql/README.md)
 - [OPA: Open Policy Agent](./opa/README.md)
