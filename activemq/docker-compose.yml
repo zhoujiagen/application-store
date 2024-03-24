@@ -8,9 +8,11 @@ services:
     env_file:
       - .env
     ports:
-      - 61613:61613
-      - 61616:61616
-      - 18161:8161 # DEPLOY_ENV: conflict with Docker Desktop Backend
+      - 61616:61616 # AMQP, STMOP, MQTT, OpenWire
+      - 5672:5672 # AMQP
+      - 61613:61613 # STMOP
+      - 1883:1883 # MQTT
+      - 18161:8161 # console, DEPLOY_ENV: conflict with Docker Desktop Backend
     volumes:
       - ./data:/var/lib/artemis-instance
     networks:

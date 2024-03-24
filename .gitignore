@@ -46,6 +46,10 @@ keycloak/data/mysql/*
 !keycloak/data/mysql/.gitkeep
 keycloak/codes/
 
+# mongodb
+mongodb/non-cluster/data/db/
+!mongodb/non-cluster/data/db/.gitkeep
+
 # mysql
 mysql/data/*
 !mysql/data/.gitkeep

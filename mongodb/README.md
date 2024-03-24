@@ -1,6 +1,8 @@
 
 # MongoDB
 
+- https://hub.docker.com/_/mongo
+
 ## Backup
 
 ```shell
@@ -162,13 +164,14 @@ Could not connect to database using connectionString: mongodb://root:root@mongo:
 root@localhost:/opt/mongodb# docker exec -it mongo bash
 root@db85548723ed:/# mongosh
 test> use admin;
+admin> db.auth('root','root');
 admin> db.createUser({user: "root", pwd: "root", roles:[{role: "root", db: "admin"}]});
 ```
 
 <!-- May need to restart `mongo-express`:
 
 ```shell
-docker compose -f mongo-docker-compose.yml restart mongo-express
+docker compose -f docker-compose.yml restart mongo-express
 ``` -->
 
 ## Stats
