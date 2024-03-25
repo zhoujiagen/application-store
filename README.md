@@ -4,6 +4,7 @@ Collections of kickoff setup scripts and demonstration examples for applications
 Conventions:
 
 - Use `DEPLOY_ENV` to mark custom settings.
+- Use `192.168.3.182` as host IP.
 
 Environments:
 

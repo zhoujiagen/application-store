@@ -1,6 +1,8 @@
 # Kafka
 
 - https://github.com/apache/kafka/tree/trunk/docker
+- https://hub.docker.com/r/apache/kafka
+- alternative: [bitnami/kafka](https://hub.docker.com/r/bitnami/kafka)
 
 ```shell
 $ vi /etc/kafka/docker/launch
@@ -29,4 +31,66 @@ This is my first event
 
 This is my first event
 This is my second event
+```
+
+## kafka-ui
+
+- https://github.com/provectus/kafka-ui
+- [cookdoc: Setting up a Local Kafka Environment in KRaft Mode with Docker-Compose and Bitnami Image, Enhanced by Provectus Kafka-UI](https://medium.com/@tetianaokhotnik/setting-up-a-local-kafka-environment-in-kraft-mode-with-docker-compose-and-bitnami-image-enhanced-29a2dcabf2a9)
+
+```properties
+# server.properties
+# DEPLOY_ENV
+advertised.listeners=PLAINTEXT://kafka-broker:9092
+```
+
+Access `http://localhost:18080/`
+
+Kafka Cluser
+- Cluster name: `kafka-broker`
+- Bootstrap servers: `kafka-broker`, `9092`
+
+## Clients
+
+### Out Container Access
+
+- [cookdoc](https://medium.com/@tetianaokhotnik/setting-up-a-local-kafka-environment-in-kraft-mode-with-docker-compose-and-bitnami-image-enhanced-29a2dcabf2a9): use `bitnami/kafka:3.4`.
+
+Add `EXTERNAL`
+
+```properties
+# server.properties
+listeners=PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094
+advertised.listeners=PLAINTEXT://127.0.0.1:9092,EXTERNAL://192.168.3.182:9094
+```
+
+### Python
+
+- https://kafka-python.readthedocs.io/en/master/
+
+```shell
+# Windows WSL
+$ python --version
+Python 3.11.5
+$ python -m virtualenv .venv
+$ source .venv/Scripts/activate
+$ pip install kafka-python
+$ pip freeze > requirements.txt
+
+# make user topic 'quickstart-events' exist
+
+$ python producer.py
+$ python consumer.py
+```
+
+### Java/Scala
+
+- https://github.com/com-lihaoyi/Ammonite 
+
+```shell
+# Terminal 1
+$ amm --watch producer.sc
+
+# Terminal 2
+$ amm --watch consumer.sc 
 ```
