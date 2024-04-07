@@ -1,4 +1,5 @@
 .vscode/
+.venv/
 
 # activemq
 activemq/data/*
@@ -47,6 +48,11 @@ keycloak/data/mysql/*
 !keycloak/data/mysql/.gitkeep
 keycloak/codes/
 
+# minio
+minio/data/*
+!minio/data/.gitkeep
+minio/clients/python/file_uploader.txt
+
 # mongodb
 mongodb/non-cluster/data/db/
 !mongodb/non-cluster/data/db/.gitkeep
@@ -66,6 +72,10 @@ postgresql/pgadmin/*
 # rabbitmq
 rabbitmq/data/*
 rabbitmq/data/.gitkeep
+
+# redis
+redis/data/*
+!redis/data/.gitkeep
 
 # sqlite
 sqlite/data/*
