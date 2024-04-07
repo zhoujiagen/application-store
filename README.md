@@ -35,5 +35,6 @@ Applications:
 - [OPA: Open Policy Agent](./opa/README.md)
 - [PostgreSQL](./postgresql/README.md)
 - [Prometheus](./prometheus/README.md)
+- [RabbitMQ](./rabbitmq/README.md)
 - [Redis](./redis/README.md)
 - [SQLite](./sqlite/README.md)

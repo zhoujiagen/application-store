@@ -63,6 +63,10 @@ postgresql/data/*
 postgresql/pgadmin/*
 !postgresql/pgadmin/.gitkeep
 
+# rabbitmq
+rabbitmq/data/*
+rabbitmq/data/.gitkeep
+
 # sqlite
 sqlite/data/*
 !sqlite/data/.gitkeep
