@@ -1,8 +1,9 @@
 version: '3.8'
 
+# TODO: add health check
 services:
   redis:
-    container_name: crawler-redis
+    container_name: redis
     restart: "no"
     image: redis:7
     volumes:

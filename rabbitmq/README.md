@@ -17,7 +17,7 @@ $ python --version
 Python 3.11.5
 $ python -m virtualenv .venv
 $ source .venv/Scripts/activate
-$ pip install kafka-python
+$ pip install pika
 $ pip freeze > requirements.txt
 ```
 
