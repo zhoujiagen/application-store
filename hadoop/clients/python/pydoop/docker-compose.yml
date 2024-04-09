@@ -1,0 +1,17 @@
+version: '3.8'
+
+# https://crs4.github.io/pydoop/installation.html#trying-pydoop-without-installing-it
+services:
+  pydoop:
+    image: pydoop
+    hostname: pydoop
+    ports:
+      - 8088:8088
+      - 9870:9870
+      - 19888:19888
+    networks:
+      - devops-network
+
+networks:
+  devops-network:
+    external: true

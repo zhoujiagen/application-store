@@ -18,11 +18,14 @@ __pycache__
 airflow/dags/*
 !airflow/dags/.gitkeep
 
+# archery
+
 # cassandra
 cassandra/data/*
 !cassandra/data/.gitkeep
 
-# archery
+# hadoop
+hadoop/clients/python/pydoop/pydoop/
 
 # harbor
 harbor/harbor-offline-installer-v2.10.1.tgz
