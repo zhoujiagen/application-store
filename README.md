@@ -15,26 +15,29 @@ Environments:
 
 Applications:
 
-- [Apache ActiveMQ Artemis](./activemq/README.md)
-- [Apache Airflow](./airflow/README.md)
-- [Apache Cassandra](./cassandra/README.md)
-- [Apache Kafka](./kafka/README.md)
-- [Apache Skywalking](./skywalking/README.md)
-- [Archery](./archery/README.md)
-- [ELK](./elk/README.md): Elasticsearch, FileBeat, Kibana
-- [Envoy](./envoy/README.md)
-- [Flask](./flask/README.md)
-- [Fortio](./fortio/README.md)
-- [Harbor](./harbor/README.md)
-- [Hazelcast](./hazelcast/README.md)
-- [Istio](./istio/README.md)
-- [Keycloak](./keycloak/README.md)
-- [MailHog](./mailhog/README.md)
-- [MongoDB](./mongodb/README.md)
-- [MySQL](./mysql/README.md)
-- [OPA: Open Policy Agent](./opa/README.md)
-- [PostgreSQL](./postgresql/README.md)
-- [Prometheus](./prometheus/README.md)
-- [RabbitMQ](./rabbitmq/README.md)
-- [Redis](./redis/README.md)
-- [SQLite](./sqlite/README.md)
+| Application                                             | Examples                        |
+| :------------------------------------------------------ | :------------------------------ |
+| [Apache ActiveMQ Artemis](./activemq/README.md)         | `stomp.py`                      |
+| [Apache Airflow](./airflow/README.md)                   | TODO                            |
+| [Apache Cassandra](./cassandra/README.md)               | CQL                             |
+| [Apache Hadoop](./hadoop/README.md)                     | pydoop                          |
+| [Apache Kafka](./kafka/README.md)                       | Python, Scala                   |
+| [Apache Skywalking](./skywalking/README.md)             | Java app                        |
+| [Archery](./archery/README.md)                          | Fix bugs                        |
+| [ELK](./elk/README.md): Elasticsearch, FileBeat, Kibana | Java app Container              |
+| [Envoy](./envoy/README.md)                              | MongoDB, httpbin, JWT Auth      |
+| [Flask](./flask/README.md)                              | JSON                            |
+| [Fortio](./fortio/README.md)                            | `load`                          |
+| [Harbor](./harbor/README.md)                            | None                            |
+| [Hazelcast](./hazelcast/README.md)                      | MySQL CDC in Java               |
+| [Istio](./istio/README.md)                              | bookinfo                        |
+| [Keycloak](./keycloak/README.md)                        | Admin CLI                       |
+| [MailHog](./mailhog/README.md)                          | `sendmail`                      |
+| [MongoDB](./mongodb/README.md)                          | NonCluster, Cluter, stats, `wt` |
+| [MySQL](./mysql/README.md)                              | 5.7, 8, Replication             |
+| [OPA: Open Policy Agent](./opa/README.md)               | `opa`, Python                   |
+| [PostgreSQL](./postgresql/README.md)                    | pgAdmin                         |
+| [Prometheus](./prometheus/README.md)                    | Exporter, AlertMaanger, Grafana |
+| [RabbitMQ](./rabbitmq/README.md)                        | Python                          |
+| [Redis](./redis/README.md)                              | TODO                            |
+| [SQLite](./sqlite/README.md)                            | sqlite-web                      |

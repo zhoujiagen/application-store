@@ -7,7 +7,7 @@ Access `http://localhost:18161/` with `devops/devops+artemis`/
 
 ```shell
 # stomp.py
-$ python --version                                                                   in cmd at 23:25:23
+$ python --version
 Python 3.11.5
 $ python -m virtualenv .venv
 $ source .venv/Scripts/activate
