@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  clickhouse-server:
+    image: clickhouse/clickhouse-server
+    container_name: clickhouse-server
+    restart: "always"
+    env_file:
+      - .env
+    ports:
+      - 8123:8123 # HTTP
+      - 9000:9000 # native
+    volumes:
+      # - ./data:/var/lib/clickhouse
+      # - ./logs:/var/log/clickhouse-server/
+      - clickhouse:/var/lib/clickhouse
+      - clickhouse-logs:/var/log/clickhouse-server
+      - ./config.xml:/etc/clickhouse-server/config.xml
+      - ./user_files:/var/lib/clickhouse/user_files
+    command: "${CLICKHOUSE_ARGS}"
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    networks:
+      - devops-network
+
+  # https://www.bytebase.com/docs/get-started/self-host/
+  # alternative: https://github.com/metrico/clickhouse-mate
+  bytebase:
+    image: bytebase/bytebase:2.14.1
+    container_name: bytebase
+    restart: "always"
+    ports:
+      - 18080:8080
+    volumes:
+      - ./bytebase:/var/opt/bytebase
+    networks:
+      - devops-network
+
+networks:
+  devops-network:
+    external: true
+
+volumes:
+  clickhouse:
+    external: true
+  clickhouse-logs:
+    external: true
