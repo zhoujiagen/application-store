@@ -20,3 +20,13 @@ Subject: Test message
 Some content!
 EOF
 ```
+
+## Clients
+
+### Python
+
+- https://docs.python.org/3/library/email.examples.html
+
+```shell
+$ python ex_mailhog.py
+```
