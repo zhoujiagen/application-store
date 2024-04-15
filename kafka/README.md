@@ -4,6 +4,18 @@
 - https://hub.docker.com/r/apache/kafka
 - alternative: [bitnami/kafka](https://hub.docker.com/r/bitnami/kafka)
 
+- 2.1.1
+
+For working with [Apache Samaz](../samza/README.md).
+
+```
+I have no name!@da987e387810:/opt/bitnami/kafka$ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic wikipedia-raw --from-beginning
+
+I have no name!@da987e387810:/opt/bitnami/kafka$ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic wikipedia-stats --from-beginning
+```
+
+- 3.7.0
+
 ```shell
 $ vi /etc/kafka/docker/launch
 ...
@@ -48,7 +60,7 @@ Access `http://localhost:18080/`
 
 Kafka Cluser
 - Cluster name: `kafka-broker`
-- Bootstrap servers: `kafka-broker`, `9092`
+- Bootstrap servers: `kafka-broker`, `9092`; `192.168.3.182`, `9094` with out container access.
 
 ## Clients
 

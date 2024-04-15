@@ -30,3 +30,8 @@ services:
 networks:
   devops-network:
     external: true
+
+# for hacking delete topic errors in Windows: not working
+# volumes:
+#   kafka:
+#     external: true
