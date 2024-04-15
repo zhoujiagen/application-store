@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  # https://hub.docker.com/r/bitnami/kafka
+  kafka-broker:
+    # image: bitnami/kafka:0.11.0-1-r1
+    image: bitnami/kafka:2.1.1
+    container_name: kafka-broker
+    restart: "always"
+    env_file:
+      - .env
+    ports:
+      - 9092:9092
+      - 9094:9094
+    volumes:
+      # - ./server.properties:/etc/kafka/docker/server.properties
+      - ./data:/bitnami/kafka
+    networks:
+      - devops-network
+    depends_on:
+      - zookeeper
+
+  # https://hub.docker.com/r/bitnami/zookeeper
+  zookeeper:
+    # image: bitnami/zookeeper:3.4.10
+    image: bitnami/zookeeper:3.4.13
+    container_name: zookeeper
+    restart: "always"
+    env_file:
+      - .env
+    ports:
+      - 2181:2181
+    volumes:
+      - ./zk-data:/bitnami/zookeeper
+    networks:
+      - devops-network
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka-ui
+    ports:
+      - 18080:8080
+    environment:
+      DYNAMIC_CONFIG_ENABLED: 'true'
+    networks:
+      - devops-network
+    depends_on:
+      - kafka-broker
+
+networks:
+  devops-network:
+    external: true
