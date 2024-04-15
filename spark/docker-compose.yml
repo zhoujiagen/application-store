@@ -1,0 +1,39 @@
+# https://github.com/bitnami/containers/tree/main/bitnami/spark
+
+version: '3.8'
+
+services:
+  spark:
+    image: bitnami/spark:3.5
+    container_name: spark
+    restart: "always"
+    env_file:
+      - .env.master
+    ports:
+      - 7077:7077
+      - 8080:8080
+      - 4040:4040
+      - 6066:6066
+    # volumes:
+    #   - ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf
+    #   - ./data:/bitnami/spark
+    networks:
+      - devops-network
+
+  spark-worker:
+    image: bitnami/spark:3.5
+    # container_name: spark-worker
+    restart: "always"
+    env_file:
+      - .env.worker
+    # volumes:
+    #   - ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf
+    #   - ./data:/bitnami/spark
+    ports:
+      - 8081-8082:8081
+    networks:
+      - devops-network
+
+networks:
+  devops-network:
+    external: true
