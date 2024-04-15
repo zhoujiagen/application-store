@@ -24,6 +24,11 @@ airflow/dags/*
 cassandra/data/*
 !cassandra/data/.gitkeep
 
+# clickhouse
+clickhouse/data
+clickhouse/logs
+clickhouse/bytebase
+
 # hadoop
 hadoop/clients/python/pydoop/pydoop/
 
@@ -44,7 +49,8 @@ istio/istio-1.20.3/
 # kafka
 kafka/data/*
 !kafka/data/.gitkeep
-!kafka/clients/python/.venv/
+kafka/2.1.1/data
+kafka/2.1.1/zk-data
 
 # keycloak
 keycloak/data/mysql/*
@@ -79,6 +85,9 @@ rabbitmq/data/.gitkeep
 # redis
 redis/data/*
 !redis/data/.gitkeep
+
+# samza
+samza/samza-hello-samza
 
 # sqlite
 sqlite/data/*

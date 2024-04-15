@@ -50,7 +50,7 @@ Logging into http://localhost:8080 as user admin of realm master
   -s enabled=true \
   -s publicClient=false \
   -s secret=bookstore-edge-service-secret \
-  -s 'redirectUris=["http://192.168.3.178:9000","http://192.168.3.178:9000/login/oauth2/code/*"]'
+  -s 'redirectUris=["http://192.168.3.182:9000","http://192.168.3.182:9000/login/oauth2/code/*"]'
 ```
 
 ### example realm values
