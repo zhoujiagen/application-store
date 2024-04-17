@@ -1,0 +1,73 @@
+# https://nightlies.apache.org/flink/flink-docs-master/docs/deployment/resource-providers/standalone/docker/
+# Session Mode
+version: "2.2"
+
+services:
+  jobmanager:
+    image: ${IMAGE_ID:-flink:latest}
+    container_name: jobmanager
+    env_file:
+      - .env
+    ports:
+      - "8081:8081"
+    command: jobmanager
+    environment:
+      FLINK_PROPERTIES: "${JOB_MANAGER_FLINK_PROPERTIES}"
+    volumes:
+      - ./archive:/tmp/archive
+      - ./log/jobmanager:/opt/flink/log
+      - ./clients/python:/opt/flink/devops/python
+    networks:
+      - devops-network
+
+  historyserver:
+    image: ${IMAGE_ID:-flink:latest}
+    container_name: historyserver
+    env_file:
+      - .env
+    ports:
+      - "8082:8082"
+    command: history-server
+    environment:
+      FLINK_PROPERTIES: "${HISTORY_SERVER_FLINK_PROPERTIES}"
+    volumes:
+      - ./archive:/tmp/archive
+      - ./log/historyserver:/opt/flink/log
+    networks:
+      - devops-network
+
+  taskmanager:
+    image: ${IMAGE_ID:-flink:latest}
+    env_file:
+      - .env
+    depends_on:
+      - jobmanager
+    command: taskmanager
+    scale: 1
+    environment:
+      FLINK_PROPERTIES: "${TASK_MANAGER_FLINK_PROPERTIES}"   
+    volumes:
+      - ./log/taskmanager:/opt/flink/log
+    networks:
+      - devops-network
+
+  # sql-client:
+  #   image: ${IMAGE_ID:-flink:latest}
+  #   container_name: sql-client
+  #   env_file:
+  #     - .env
+  #   command: tail -f /dev/null #bin/sql-client.sh
+  #   depends_on:
+  #     - jobmanager
+  #   environment:
+  #     FLINK_PROPERTIES: "${SQL_CLIENT_FLINK_PROPERTIES}"
+  #   networks:
+  #     - devops-network
+
+# docker volume create flink-volume
+# volumes:
+#   flink-volume:
+
+networks:
+  devops-network:
+    external: true

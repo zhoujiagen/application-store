@@ -29,6 +29,10 @@ clickhouse/data
 clickhouse/logs
 clickhouse/bytebase
 
+# flink
+flink/archive
+flink/log
+
 # hadoop
 hadoop/clients/python/pydoop/pydoop/
 

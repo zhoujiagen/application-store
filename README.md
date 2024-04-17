@@ -20,6 +20,7 @@ Applications:
 | [Apache ActiveMQ Artemis](./activemq/README.md)         | `stomp.py`                             |
 | [Apache Airflow](./airflow/README.md)                   | TODO                                   |
 | [Apache Cassandra](./cassandra/README.md)               | CQL                                    |
+| [Apache Flink](./flink/README.md)                       | Python                                 |
 | [Apache Hadoop](./hadoop/README.md)                     | pydoop                                 |
 | [Apache Kafka](./kafka/README.md)                       | Python, Scala                          |
 | [Apache Samza](./samza/README.md)                       | Java(as library)                       |
