@@ -35,15 +35,18 @@ Applications:
 | [Harbor](./harbor/README.md)                            | None                                   |
 | [Hazelcast](./hazelcast/README.md)                      | MySQL CDC in Java                      |
 | [Istio](./istio/README.md)                              | bookinfo                               |
+| [Jaeger](./jaeger/README.md)                            | Python                                 |
 | [Keycloak](./keycloak/README.md)                        | Admin CLI                              |
 | [MailHog](./mailhog/README.md)                          | `sendmail`                             |
 | [MinIO](./minio/README.md)                              | Python                                 |
 | [MongoDB](./mongodb/README.md)                          | NonCluster, Cluter, stats, `wt`        |
 | [MySQL](./mysql/README.md)                              | 5.7, 8, Replication                    |
 | [OPA: Open Policy Agent](./opa/README.md)               | `opa`, Python                          |
+| [OpenResty](./openresty/README.md)                      | `lua-resty-mysql`                      |
 | [PostgreSQL](./postgresql/README.md)                    | pgAdmin                                |
 | [Prometheus](./prometheus/README.md)                    | Exporter, AlertMaanger, Grafana        |
 | [RabbitMQ](./rabbitmq/README.md)                        | Python                                 |
 | [Redis](./redis/README.md)                              | TODO                                   |
 | [SQLite](./sqlite/README.md)                            | sqlite-web                             |
 | [Testcontainers](./testcontainers/README.md)            | Python                                 |
+| [Vector](./vector/README.md)                            | Nginx log to ClickHouse                |

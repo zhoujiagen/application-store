@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  openresty:
+    image: openresty/openresty:alpine
+    container_name: openresty
+    restart: "always"
+    ports:
+    - 18080:8080
+    volumes:
+      - ./conf:/etc/nginx/conf.d
+      - ./modules/lua-resty-mysql-0.27:/etc/nginx/lib/lua-resty-mysql
+    networks:
+      - devops-network
+
+networks:
+  devops-network:
+    external: true

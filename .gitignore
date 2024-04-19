@@ -77,6 +77,9 @@ mysql/data/*
 mysql/8/data/*
 !mysql/8/data/.gitkeep
 
+# openresty
+openresty/modules/lua-resty-mysql-0.27
+
 # postgresql
 postgresql/data/*
 postgresql/pgadmin/*
@@ -96,3 +99,7 @@ samza/samza-hello-samza
 # sqlite
 sqlite/data/*
 !sqlite/data/.gitkeep
+
+# vector
+vector/bytebase
+vector/logs

@@ -1,0 +1,74 @@
+#                                    __   __  __
+#                                    \ \ / / / /
+#                                     \ V / / /
+#                                      \_/  \/
+#
+#                                    V E C T O R
+#                                   Configuration
+#
+# ------------------------------------------------------------------------------
+# Website: https://vector.dev
+# Docs: https://vector.dev/docs
+# Chat: https://chat.vector.dev
+# ------------------------------------------------------------------------------
+
+# Change this to use a non-default directory for Vector data storage:
+# data_dir: "/var/lib/vector"
+
+# Random Syslog-formatted logs
+sources:
+  # dummy_logs:
+  #   type: "demo_logs"
+  #   format: "syslog"
+  #   interval: 1
+  track:
+    type: "file"
+    include: 
+      - "/etc/vector/logs/track.log"
+    read_from: "end"
+
+# Parse Syslog logs
+# See the Vector Remap Language reference for more info: https://vrl.dev
+transforms:
+  # parse_logs:
+  #   type: "remap"
+  #   inputs: ["dummy_logs"]
+  #   source: |
+  #     . = parse_syslog!(string!(.message))
+  process:
+    type: "remap" # https://vector.dev/docs/reference/configuration/transforms/remap/
+    inputs: ["track"]
+    # https://medium.com/datadenys/using-vector-to-feed-nginx-logs-to-clickhouse-in-real-time-197745d9e88b
+    source: |-
+      . |= parse_regex!(.message, r'^(?P<ip>\d+\.\d+\.\d+\.\d+) \- (?P<date>\d+\-\d+\-\d+)T(?P<time>\d+:\d+:\d+).+?"(?P<url>.+?)" (?P<status>\d+) (?P<size>\d+) "(?P<agent>.+?)"$')
+      .status = to_int!(.status)
+      .size = to_int!(.size)
+      .time = .date + " " + .time
+
+# Print parsed logs to stdout
+sinks:
+  print:
+    type: "console"
+    # inputs: ["parse_logs"]
+    inputs: ["process"]
+    encoding:
+      codec: "json"
+  # https://vector.dev/docs/reference/configuration/sinks/clickhouse/
+  clickhouse:
+    type: "clickhouse"
+    inputs: ["process"]
+    endpoint: "http://clickhouse-server:8123"
+    auth:
+      strategy: "basic"
+      user: "devops"
+      password: "devops+clickhouse"
+    database: "devops"
+    table: "log"
+    skip_unknown_fields: true
+
+# Vector's GraphQL API (disabled by default)
+# Uncomment to try it out with the `vector top` command or
+# in your browser at http://localhost:8686
+api:
+  enabled: true
+  address: "0.0.0.0:8686"
