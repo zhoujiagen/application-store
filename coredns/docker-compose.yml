@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  coredns:
+    image: coredns/coredns:1.11.1
+    container_name: coredns
+    restart: "always"
+    ports:
+      - 1053:53/tcp
+      - 1053:53/udp
+    volumes:
+      - ./Corefile:/Corefile
+    entrypoint: ["/coredns", "-conf", "/Corefile"]
+    networks:
+      - devops-network
+
+  etcd:
+    image: ${ETCD_IMAGE_ID}
+    container_name: etcd
+    restart: "always"
+    env_file:
+      - .env
+    ports:
+      - 12379:12379
+      - 12380:12380
+    volumes:
+      - ./etcd-data:/bitnami/etcd
+    networks:
+      - devops-network
+
+networks:
+  devops-network:
+    external: true

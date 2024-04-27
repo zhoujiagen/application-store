@@ -1,0 +1,14 @@
+.:53 {
+    whoami
+    log
+}
+
+devops.org:53 {
+    etcd services.devops.org {
+        path /srv
+        endpoint http://192.168.3.182:12379
+    }
+    errors
+    log
+    debug
+}

@@ -1,0 +1,17 @@
+# example from 'Learning CoreDNS'
+
+foo.example {
+  root /etc/coredns/zones # Don't forget to tell CoreDNS which directory to look in!
+  file db.foo.example
+  errors
+  log
+}
+# If you want your DNS server to handle recursive queries, too,
+# you'll need an entry like the following. If it's authoritative-
+# only, omit it.
+. {
+  forward 8.8.8.8 8.8.4.4
+  cache
+  errors
+  log
+}

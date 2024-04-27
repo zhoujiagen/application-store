@@ -1,0 +1,8 @@
+# example from 'Learning CoreDNS'
+
+. {
+  forward . 8.8.8.8 8.8.4.4
+  cache
+  errors
+  log
+}

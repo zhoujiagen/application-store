@@ -1,0 +1,27 @@
+# example from 'Learning CoreDNS'
+
+(logerrors) {
+  errors
+  log
+}
+
+bar.example {
+  transfer from 10.0.0.1
+  import logerrors
+}
+
+# A given DNS server can, of course, be secondary for some zones
+# and primary for others...
+foo.example {
+  file db.foo.example
+  root /etc/coredns/zones
+  import logerrors
+}
+
+# And again, if you want your DNS server to handle recursive
+# queries
+. {
+  forward 8.8.8.8 8.8.4.4
+  cache
+  import logerrors
+}
