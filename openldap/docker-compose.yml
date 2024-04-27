@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  openldap:
+    image: bitnami/openldap:2.6.7
+    container_name: openldap
+    restart: "always"
+    env_file:
+      - .env
+    ports:
+      # - 1389:1389
+      - 389:389
+      - 1636:1636
+    volumes:
+      - ./openldap_data:/bitnami/openldap
+    networks:
+      - devops-network
+
+networks:
+  devops-network:
+    external: true

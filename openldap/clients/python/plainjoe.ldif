@@ -1,0 +1,81 @@
+version: 1
+
+dn: dc=plainjoe,dc=devops,dc=org
+objectClass: dcObject
+objectClass: organization
+dc: plainjoe
+o: PlainJoe
+
+dn: ou=people,dc=plainjoe,dc=devops,dc=org
+objectClass: organizationalUnit
+objectClass: top
+ou: people
+
+dn: cn=Manager,dc=plainjoe,dc=devops,dc=org
+objectClass: organizationalRole
+objectClass: top
+cn: Manager
+
+dn: cn=Gerry Carter,ou=people,dc=plainjoe,dc=devops,dc=org
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: Gerry Carter
+sn: Carter
+labeledURI: http://www.plainjoe.devops.org
+mail: carter@nowhere.net
+telephoneNumber: 234-555-6789
+telephoneNumber: 555-123-1234
+
+dn: cn=Peabody Soup,ou=people,dc=plainjoe,dc=devops,dc=org
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: Peabody Soup
+sn: Soup
+
+dn: cn=Gerald W. Carter,ou=people,dc=plainjoe,dc=devops,dc=org
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: Gerald W. Carter
+sn: Carter
+departmentNumber: Engineering
+labeledURI: http://www.plainjoe.devops.org/
+mail: -gcarter@valinux.com
+mail: jerry@plainjoe.devops.org
+mobile: 222-555-1011
+pager: 222-555-6789
+roomNumber: 1234 Dudley Hall
+telephoneNumber: 222-555-2345
+
+dn: cn=Jerry Carter,cn=Manager,dc=plainjoe,dc=devops,dc=org
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: Jerry Carter
+sn: Carter
+labeledURI: http://www.plainjoe.devops.org
+mail: carter@nowhere.net
+telephoneNumber: 555-123-1234
+
+dn: cn=Gerald W. Carter,cn=Manager,dc=plainjoe,dc=devops,dc=org
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: Gerald W. Carter
+sn: Carter
+departmentNumber: Engineering
+labeledURI: http://www.plainjoe.devops.org/
+mail: -gcarter@valinux.com
+mail: jerry@plainjoe.devops.org
+mobile: 222-555-1011
+pager: 222-555-6789
+roomNumber: 1234 Dudley Hall
+telephoneNumber: 222-555-2345
+
