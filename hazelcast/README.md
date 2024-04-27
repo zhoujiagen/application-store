@@ -4,14 +4,14 @@
 
 ## Docker Deployment
 
-> 192.168.3.131: local host ip
+> 192.168.3.182: local host ip
 > hz-cluster: cluster name
 
 Local cluster with docker:
 
 ```shell
-docker run --rm --name member1 -e HZ_NETWORK_PUBLICADDRESS=192.168.3.131:5701 -p 5701:5701 hazelcast/hazelcast:5.3.6
-docker run --rm --name member2 -e HZ_NETWORK_PUBLICADDRESS=192.168.3.131:5702 -p 5702:5701 hazelcast/hazelcast:5.3.6
+docker run --rm --name member1 -e HZ_NETWORK_PUBLICADDRESS=192.168.3.182:5701 -p 5701:5701 hazelcast/hazelcast:5.3.6
+docker run --rm --name member2 -e HZ_NETWORK_PUBLICADDRESS=192.168.3.182:5702 -p 5702:5701 hazelcast/hazelcast:5.3.6
 ```
 
 Local cluster with docker compose:
@@ -19,8 +19,8 @@ Local cluster with docker compose:
 ```shell
 docker compose ps
 NAME                IMAGE                       COMMAND             SERVICE             CREATED             STATUS                    PORTS
-hz-mem1             hazelcast/hazelcast:5.3.6   "hz start"          hz-mem1             17 seconds ago      Up 16 seconds (healthy)   192.168.3.131:5701->5701/tcp
-hz-mem2             hazelcast/hazelcast:5.3.6   "hz start"          hz-mem2             17 seconds ago      Up 16 seconds (healthy)   192.168.3.131:5702->5701/tcp
+hz-mem1             hazelcast/hazelcast:5.3.6   "hz start"          hz-mem1             17 seconds ago      Up 16 seconds (healthy)   192.168.3.182:5701->5701/tcp
+hz-mem2             hazelcast/hazelcast:5.3.6   "hz start"          hz-mem2             17 seconds ago      Up 16 seconds (healthy)   192.168.3.182:5702->5701/tcp
 ```
 
 Management Center:
@@ -29,7 +29,7 @@ Management Center:
 http://localhost:18080/
 
 hz-cluster
-192.168.3.131:5701,192.168.3.131:5702
+192.168.3.182:5701,192.168.3.182:5702
 ```
 
 ## CDC
@@ -96,18 +96,18 @@ Submit job:
 
 ```shell
 # hz-mem1
-$ bin/hz-cli -t hz-cluster@192.168.3.131:5701 submit apps/hazelcast-cdc-mysql/target/hazelcast-cdc-mysql-1.0-SNAPSHOT.jar
+$ bin/hz-cli -t hz-cluster@192.168.3.182:5701 submit apps/hazelcast-cdc-mysql/target/hazelcast-cdc-mysql-1.0-SNAPSHOT.jar
 ```
 
 HZ SQL or HZ CLI:
 
 ```shell
 # hz-mem1
-$ bin/hz-cli -t hz-cluster@192.168.3.131:5701 list-jobs
+$ bin/hz-cli -t hz-cluster@192.168.3.182:5701 list-jobs
 ID                  STATUS             SUBMISSION TIME         NAME
 0b5a-1707-5240-0004 RUNNING            2024-03-07T05:26:35.749 mysql-monitor
 # or
-$ bin/hz-cli -t hz-cluster@192.168.3.131:5701 sql
+$ bin/hz-cli -t hz-cluster@192.168.3.182:5701 sql
 sql> show jobs;
 +--------------------+
 |name                |
@@ -116,7 +116,7 @@ sql> show jobs;
 +--------------------+
 1 row(s) selected
 
-$ bin/hz-cli -t hz-cluster@192.168.3.131:5701 console
+$ bin/hz-cli -t hz-cluster@192.168.3.182:5701 console
 hazelcast[default] > ns customers
 namespace: customers
 hazelcast[customers] > m.entries
@@ -161,7 +161,7 @@ Cancel job and clean map:
 
 ```shell
 # hz-mem1
-$ bin/hz-cli -t hz-cluster@192.168.3.131:5701 cancel mysql-monitor
+$ bin/hz-cli -t hz-cluster@192.168.3.182:5701 cancel mysql-monitor
 Cancelling job id=0b5a-1707-5240-0004, name=mysql-monitor, submissionTime=2024-03-07T05:26:35.749
 Job cancelled. 
 

@@ -29,7 +29,7 @@ static_resources:
                   forward_payload_header: x-jwt-payload
                   remote_jwks:
                     http_uri: # DEPLOY_ENV ip
-                      #uri: "http://192.168.3.131:18080/realms/envoy/protocol/openid-connect/certs"
+                      #uri: "http://192.168.3.182:18080/realms/envoy/protocol/openid-connect/certs"
                       uri: "http://keycloak:8080/realms/envoy/protocol/openid-connect/certs"
                       cluster: keycloak
                       timeout: 1s
@@ -68,7 +68,7 @@ static_resources:
           - endpoint:
               address:
                 socket_address:
-                  address: keycloak #192.168.3.131 # DEPLOY_ENV ip
+                  address: keycloak #192.168.3.182 # DEPLOY_ENV ip
                   port_value: 8080
 
 admin:

@@ -29,6 +29,13 @@ clickhouse/data
 clickhouse/logs
 clickhouse/bytebase
 
+# coredns
+coredns/etcd-data
+
+# etcd
+etcd/etcd-data
+etcd/cluster/etcd-data-*
+
 # flink
 flink/archive
 flink/log
@@ -76,6 +83,9 @@ mysql/data/*
 
 mysql/8/data/*
 !mysql/8/data/.gitkeep
+
+# openldap
+openldap/openldap_data
 
 # openresty
 openresty/modules/lua-resty-mysql-0.27

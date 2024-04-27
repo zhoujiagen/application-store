@@ -12,7 +12,7 @@ import com.hazelcast.jet.pipeline.StreamSource;
 public class JetJob {
     public static void main(String[] args) {
         StreamSource<ChangeRecord> source = MySqlCdcSources.mysql("source")
-                .setDatabaseAddress("192.168.3.131") // DEPLOY_ENV
+                .setDatabaseAddress("192.168.3.182") // DEPLOY_ENV
                 .setDatabasePort(3306)
                 .setDatabaseUser("debezium")
                 .setDatabasePassword("dbz")
