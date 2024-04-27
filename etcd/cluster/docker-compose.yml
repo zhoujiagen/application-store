@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  etcd-node-1:
+    image: ${IMAGE_ID}
+    container_name: etcd-node-1
+    restart: "always"
+    env_file:
+      - .env
+      - node1.env
+    ports:
+      - 12380:12380
+      - 12379:12379
+    volumes:
+      - ./etcd-data-1:/bitnami/etcd
+    networks:
+      - devops-network
+  
+  etcd-node-2:
+    image: ${IMAGE_ID}
+    container_name: etcd-node-2
+    restart: "always"
+    env_file:
+      - .env
+      - node2.env
+    ports:
+      - 12381:12381
+      - 12378:12378
+    volumes:
+      - ./etcd-data-2:/bitnami/etcd
+    networks:
+      - devops-network
+  
+  etcd-node-3:
+    image: ${IMAGE_ID}
+    container_name: etcd-node-3
+    restart: "always"
+    env_file:
+      - .env
+      - node3.env
+    ports:
+      - 12382:12382
+      - 12377:12377
+    volumes:
+      - ./etcd-data-3:/bitnami/etcd
+    networks:
+      - devops-network
+
+networks:
+  devops-network:
+    external: true

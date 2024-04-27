@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  etcd:
+    image: ${IMAGE_ID}
+    container_name: ${CONTAINER_NAME}
+    restart: "always"
+    env_file:
+      - .env
+    ports:
+      - 12379:12379
+      - 12380:12380
+    volumes:
+      - ./etcd-data:/bitnami/etcd
+    networks:
+      - devops-network
+
+networks:
+  devops-network:
+    external: true
