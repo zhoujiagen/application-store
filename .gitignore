@@ -110,6 +110,13 @@ samza/samza-hello-samza
 sqlite/data/*
 !sqlite/data/.gitkeep
 
+# tinkerpop
+tinkerpop/console-conf/conf/*
+!tinkerpop/console-conf/conf/remote.yaml
+tinkerpop/server-conf/conf/*
+!tinkerpop/server-conf/conf/gremlin-server.yaml
+!tinkerpop/server-conf/conf/gremlin-server-rest-modern.yaml
+
 # vector
 vector/bytebase
 vector/logs

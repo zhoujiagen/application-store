@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  gremlin-server:
+    # https://github.com/apache/tinkerpop/blob/master/gremlin-server/Dockerfile
+    image: tinkerpop/gremlin-server:3.7.2
+    container_name: gremlin-server
+    restart: "always"
+    ports:
+      - "8182:8182"
+    volumes:
+      - ./server-conf/conf:/opt/gremlin-server/conf
+    # command: ["conf/gremlin-server.yaml"] # default
+    command: ["conf/gremlin-server-rest-modern.yaml"]
+    networks:
+      - devops-network
+
+  gremlin-console:
+    # https://github.com/apache/tinkerpop/blob/master/gremlin-console/Dockerfile
+    image: tinkerpop/gremlin-console:3.7.2
+    container_name: gremlin-console
+    restart: "always"
+    entrypoint: "tail -f /dev/null"
+    volumes:
+      - ./console-conf/conf/remote.yaml:/opt/gremlin-console/conf/remote.yaml
+      - ./scripts:/opt/gremlin-console/scripts
+    networks:
+      - devops-network
+
+networks:
+  devops-network:
+    external: true

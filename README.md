@@ -26,6 +26,7 @@ Applications:
 | [Apache Samza](./samza/README.md)                       | Java(as library)                      |
 | [Apache Skywalking](./skywalking/README.md)             | Java app                              |
 | [Apache Spark](./spark/README.md)                       | `pyspark`, `spark-shell`, `spark-sql` |
+| [Apache TinkerPop](./tinkerpop/README.md)               | HTTP, `gremlin-console`, Alchemy.js   |
 | [Archery](./archery/README.md)                          | Fix bugs                              |
 | [ClickHouse](./clickhouse/README.md)                    | `clickhouse-client`, Bytebase, Python |
 | [CoreDNS](./coredns/README.md)                          | `etcd` plugin, `dig`                  |
