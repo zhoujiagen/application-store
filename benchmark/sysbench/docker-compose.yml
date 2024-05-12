@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  sysbench:
+    image: dev/sysbench
+    container_name: sysbench
+    restart: "always"
+    volumes:
+      - ./benchmark.sh:/usr/share/sysbench/benchmark.sh
+      - ./sysbench-tpcc/tpcc_check.lua:/usr/share/sysbench/tpcc_check.lua
+      - ./sysbench-tpcc/tpcc_common.lua:/usr/share/sysbench/tpcc_common.lua
+      - ./sysbench-tpcc/tpcc_run.lua:/usr/share/sysbench/tpcc_run.lua
+      - ./sysbench-tpcc/tpcc.lua:/usr/share/sysbench/tpcc.lua
+    command: "bash /usr/share/sysbench/benchmark.sh && tail -f /dev/null"
+    networks:
+      - devops-network
+
+networks:
+  devops-network:
+    external: true

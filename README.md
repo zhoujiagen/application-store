@@ -39,6 +39,7 @@ Applications:
 | [Hazelcast](./hazelcast/README.md)                      | MySQL CDC in Java                     |
 | [Istio](./istio/README.md)                              | bookinfo                              |
 | [Jaeger](./jaeger/README.md)                            | Python                                |
+| [Jupyter Notebook](./jupyter/README.md)                 | `ipython-sql`                         |
 | [Keycloak](./keycloak/README.md)                        | Admin CLI                             |
 | [MailHog](./mailhog/README.md)                          | `sendmail`                            |
 | [MinIO](./minio/README.md)                              | Python                                |
@@ -47,6 +48,7 @@ Applications:
 | [OPA: Open Policy Agent](./opa/README.md)               | `opa`, Python                         |
 | [OpenLDAP](./openldap/README.md)                        | Apache Directory Studio™, Python      |
 | [OpenResty](./openresty/README.md)                      | `lua-resty-mysql`                     |
+| [Portainer](./portainer/README.md)                      | -                                     |
 | [PostgreSQL](./postgresql/README.md)                    | pgAdmin                               |
 | [Prometheus](./prometheus/README.md)                    | Exporter, AlertMaanger, Grafana       |
 | [RabbitMQ](./rabbitmq/README.md)                        | Python                                |
@@ -54,3 +56,10 @@ Applications:
 | [SQLite](./sqlite/README.md)                            | sqlite-web                            |
 | [Testcontainers](./testcontainers/README.md)            | Python                                |
 | [Vector](./vector/README.md)                            | Nginx log to ClickHouse               |
+
+
+Benchmark:
+
+| Application                                | Examples        |
+| :----------------------------------------- | :-------------- |
+| [sysbench](./benchmark/sysbench/README.md) | `sysbench-tpcc` |

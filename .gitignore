@@ -20,6 +20,11 @@ airflow/dags/*
 
 # archery
 
+# benchmark
+## sysbench
+benchmark/sysbench/lua
+benchmark/sysbench/sysbench-tpcc
+
 # cassandra
 cassandra/data/*
 !cassandra/data/.gitkeep
