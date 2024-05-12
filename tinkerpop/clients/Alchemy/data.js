@@ -12,7 +12,7 @@
 //   .catch(err => console.error(err));
 
 const data = {
-  "requestId": "52fef28d-19db-44e3-b0b9-8937bca6cd36",
+  "requestId": "395fec4a-f891-4046-84a8-5b80459e77e2",
   "status": {
     "message": "",
     "code": 200,
@@ -24,64 +24,12 @@ const data = {
         "graph": {
           "vertices": [
             {
-              "id": 17,
+              "id": 49,
               "label": "person",
               "properties": {
                 "name": [
                   {
-                    "id": 18,
-                    "value": "Jim",
-                    "label": "name"
-                  }
-                ]
-              }
-            },
-            {
-              "id": 2,
-              "label": "person",
-              "properties": {
-                "name": [
-                  {
-                    "id": 3,
-                    "value": "Dave",
-                    "label": "name"
-                  }
-                ]
-              }
-            },
-            {
-              "id": 19,
-              "label": "person",
-              "properties": {
-                "name": [
-                  {
-                    "id": 20,
-                    "value": "Paras",
-                    "label": "name"
-                  }
-                ]
-              }
-            },
-            {
-              "id": 4,
-              "label": "person",
-              "properties": {
-                "name": [
-                  {
-                    "id": 5,
-                    "value": "Josh",
-                    "label": "name"
-                  }
-                ]
-              }
-            },
-            {
-              "id": 21,
-              "label": "person",
-              "properties": {
-                "name": [
-                  {
-                    "id": 22,
+                    "id": 50,
                     "value": "Denise",
                     "label": "name"
                   }
@@ -89,12 +37,38 @@ const data = {
               }
             },
             {
-              "id": 6,
+              "id": 35,
               "label": "person",
               "properties": {
                 "name": [
                   {
-                    "id": 7,
+                    "id": 36,
+                    "value": "Dave",
+                    "label": "name"
+                  }
+                ]
+              }
+            },
+            {
+              "id": 37,
+              "label": "person",
+              "properties": {
+                "name": [
+                  {
+                    "id": 38,
+                    "value": "Josh",
+                    "label": "name"
+                  }
+                ]
+              }
+            },
+            {
+              "id": 39,
+              "label": "person",
+              "properties": {
+                "name": [
+                  {
+                    "id": 40,
                     "value": "Ted",
                     "label": "name"
                   }
@@ -102,12 +76,12 @@ const data = {
               }
             },
             {
-              "id": 8,
+              "id": 41,
               "label": "person",
               "properties": {
                 "name": [
                   {
-                    "id": 9,
+                    "id": 42,
                     "value": "Hank",
                     "label": "name"
                   }
@@ -115,13 +89,39 @@ const data = {
               }
             },
             {
-              "id": 15,
+              "id": 43,
               "label": "person",
               "properties": {
                 "name": [
                   {
-                    "id": 16,
+                    "id": 44,
                     "value": "Kelly",
+                    "label": "name"
+                  }
+                ]
+              }
+            },
+            {
+              "id": 45,
+              "label": "person",
+              "properties": {
+                "name": [
+                  {
+                    "id": 46,
+                    "value": "Jim",
+                    "label": "name"
+                  }
+                ]
+              }
+            },
+            {
+              "id": 47,
+              "label": "person",
+              "properties": {
+                "name": [
+                  {
+                    "id": 48,
+                    "value": "Paras",
                     "label": "name"
                   }
                 ]
@@ -130,100 +130,214 @@ const data = {
           ],
           "edges": [
             {
-              "id": 10,
-              "label": "is_friends_with",
+              "id": 64,
+              "label": "works_with",
               "inVLabel": "person",
               "outVLabel": "person",
-              "inV": 6,
-              "outV": 2
+              "inV": 39,
+              "outV": 35,
+              "properties": {
+                "start_year": {
+                  "key": "start_year",
+                  "value": 2016
+                },
+                "end_year": {
+                  "key": "end_year",
+                  "value": 2017
+                }
+              }
             },
             {
-              "id": 11,
-              "label": "is_friends_with",
+              "id": 65,
+              "label": "works_with",
               "inVLabel": "person",
               "outVLabel": "person",
-              "inV": 4,
-              "outV": 2
+              "inV": 39,
+              "outV": 37,
+              "properties": {
+                "start_year": {
+                  "key": "start_year",
+                  "value": 2016
+                },
+                "end_year": {
+                  "key": "end_year",
+                  "value": 2019
+                }
+              }
             },
             {
-              "id": 12,
-              "label": "is_friends_with",
+              "id": 66,
+              "label": "works_with",
               "inVLabel": "person",
               "outVLabel": "person",
-              "inV": 8,
-              "outV": 2
+              "inV": 41,
+              "outV": 35,
+              "properties": {
+                "start_year": {
+                  "key": "start_year",
+                  "value": 2017
+                },
+                "end_year": {
+                  "key": "end_year",
+                  "value": 2018
+                }
+              }
             },
             {
-              "id": 13,
-              "label": "is_friends_with",
+              "id": 67,
+              "label": "works_with",
               "inVLabel": "person",
               "outVLabel": "person",
-              "inV": 8,
-              "outV": 4
+              "inV": 43,
+              "outV": 35,
+              "properties": {
+                "start_year": {
+                  "key": "start_year",
+                  "value": 2018
+                }
+              }
             },
             {
-              "id": 14,
-              "label": "is_friends_with",
+              "id": 68,
+              "label": "works_with",
               "inVLabel": "person",
               "outVLabel": "person",
-              "inV": 4,
-              "outV": 6
+              "inV": 49,
+              "outV": 35,
+              "properties": {
+                "start_year": {
+                  "key": "start_year",
+                  "value": 2018
+                }
+              }
             },
             {
-              "id": 23,
-              "label": "is_friends_with",
+              "id": 69,
+              "label": "works_with",
               "inVLabel": "person",
               "outVLabel": "person",
-              "inV": 17,
-              "outV": 2
+              "inV": 43,
+              "outV": 49,
+              "properties": {
+                "start_year": {
+                  "key": "start_year",
+                  "value": 2018
+                }
+              }
             },
             {
-              "id": 24,
+              "id": 51,
               "label": "is_friends_with",
               "inVLabel": "person",
               "outVLabel": "person",
-              "inV": 15,
-              "outV": 2
+              "inV": 39,
+              "outV": 35
             },
             {
-              "id": 25,
+              "id": 52,
               "label": "is_friends_with",
               "inVLabel": "person",
               "outVLabel": "person",
-              "inV": 17,
-              "outV": 15
+              "inV": 37,
+              "outV": 35
             },
             {
-              "id": 26,
+              "id": 53,
               "label": "is_friends_with",
               "inVLabel": "person",
               "outVLabel": "person",
-              "inV": 21,
-              "outV": 15
+              "inV": 41,
+              "outV": 35
             },
             {
-              "id": 27,
+              "id": 54,
               "label": "is_friends_with",
               "inVLabel": "person",
               "outVLabel": "person",
-              "inV": 21,
-              "outV": 17
+              "inV": 41,
+              "outV": 37
             },
             {
-              "id": 28,
+              "id": 55,
               "label": "is_friends_with",
               "inVLabel": "person",
               "outVLabel": "person",
-              "inV": 19,
-              "outV": 17
+              "inV": 37,
+              "outV": 39
             },
             {
-              "id": 29,
+              "id": 56,
               "label": "is_friends_with",
               "inVLabel": "person",
               "outVLabel": "person",
-              "inV": 21,
-              "outV": 19
+              "inV": 45,
+              "outV": 35
+            },
+            {
+              "id": 57,
+              "label": "is_friends_with",
+              "inVLabel": "person",
+              "outVLabel": "person",
+              "inV": 43,
+              "outV": 35
+            },
+            {
+              "id": 58,
+              "label": "is_friends_with",
+              "inVLabel": "person",
+              "outVLabel": "person",
+              "inV": 45,
+              "outV": 43
+            },
+            {
+              "id": 59,
+              "label": "is_friends_with",
+              "inVLabel": "person",
+              "outVLabel": "person",
+              "inV": 49,
+              "outV": 43
+            },
+            {
+              "id": 60,
+              "label": "is_friends_with",
+              "inVLabel": "person",
+              "outVLabel": "person",
+              "inV": 49,
+              "outV": 45
+            },
+            {
+              "id": 61,
+              "label": "is_friends_with",
+              "inVLabel": "person",
+              "outVLabel": "person",
+              "inV": 47,
+              "outV": 45
+            },
+            {
+              "id": 62,
+              "label": "is_friends_with",
+              "inVLabel": "person",
+              "outVLabel": "person",
+              "inV": 49,
+              "outV": 47
+            },
+            {
+              "id": 63,
+              "label": "works_with",
+              "inVLabel": "person",
+              "outVLabel": "person",
+              "inV": 37,
+              "outV": 35,
+              "properties": {
+                "start_year": {
+                  "key": "start_year",
+                  "value": 2016
+                },
+                "end_year": {
+                  "key": "end_year",
+                  "value": 2017
+                }
+              }
             }
           ]
         },

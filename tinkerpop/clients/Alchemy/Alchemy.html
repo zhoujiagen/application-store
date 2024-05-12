@@ -15,7 +15,7 @@
 </head>
 
 <body>
-  <div id="alchemy" class="alchemy" style="background-color: lightblue;"></div>
+  <div id="alchemy" class="alchemy"></div>
   <script type="text/javascript" src="./data.js"></script>
   <script type="text/javascript">
     const dataGraph = data['result']['data'][0]['graph'];
@@ -44,7 +44,7 @@
       nodeTypes: { "type": ["person"] },
       cluster: false,
       clusterColours: ["#DD79FF", "#00FF30", "#5168FF", "#f83f00", "#ff8d8f"],
-      forceLocked: false,
+      // forceLocked: false,
 
       nodeCaption: 'caption',
       nodeCaptionsOnByDefault: true,
@@ -60,19 +60,39 @@
       edgeCaption: 'caption',
       edgeCaptionsOnByDefault: true,
       directedEdges: true,
+      edgeTypes: { "caption": ["works_with", "is_friends_with"] },
       edgeStyle: {
         "all": {
           "opacity": 0.5,
+          "color": "black",
+          "width": 2,
+        },
+        "works_with": {
+          "color": "red",
         }
       },
 
       initialScale: 1,
-      initialTranslate: [250, 150],
+      initialTranslate: [10, 20],
 
       backgroundColour: '#CCE8CF',
+
+      showEditor: false,
+      showControlDash: true,
+
+      showStats: true,
+      nodeStats: true,
+
+      showFilters: true,
+      nodeFilters: true,
+
+      captionToggle: true,
+      edgesToggle: true,
+      nodesToggle: true,
     }
 
-    alchemy.begin(config)
+    // alchemy.begin(config)
+    alchemy = new Alchemy(config)
   </script>
 </body>
 
