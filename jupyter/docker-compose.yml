@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  jupyter-notebook:
+    image: jupyter/base-notebook:x86_64-notebook-7.0.6
+    container_name: jupyter-notebook
+    restart: "always"
+    ports:
+      - 18888:8888
+    volumes:
+      - ./data:/home/jovyan/work
+    networks:
+      - devops-network
+
+networks:
+  devops-network:
+    external: true
