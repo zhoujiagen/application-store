@@ -17,63 +17,63 @@ Environments:
 
 | Application                                | Examples        |
 | :----------------------------------------- | :-------------- |
-| [Fortio](./fortio/README.md)               | `load`          |
+| [Fortio](./benchmark/fortio/README.md)     | `load`          |
 | [sysbench](./benchmark/sysbench/README.md) | `sysbench-tpcc` |
 
 ## Data Engineering Applications
 
-| Application                                             | Examples                              |
-| :------------------------------------------------------ | :------------------------------------ |
-| [Apache ActiveMQ Artemis](./activemq/README.md)         | `stomp.py`                            |
-| [Apache Airflow](./airflow/README.md)                   | TODO                                  |
-| [Apache Cassandra](./cassandra/README.md)               | CQL                                   |
-| [Apache Flink](./flink/README.md)                       | Python                                |
-| [Apache Hadoop](./hadoop/README.md)                     | pydoop                                |
-| [Apache Kafka](./kafka/README.md)                       | Python, Scala                         |
-| [Apache Samza](./samza/README.md)                       | Java(as library)                      |
-| [Apache Spark](./spark/README.md)                       | `pyspark`, `spark-shell`, `spark-sql` |
-| [Apache TinkerPop](./tinkerpop/README.md)               | HTTP, `gremlin-console`, Alchemy.js   |
-| [ClickHouse](./clickhouse/README.md)                    | `clickhouse-client`, Bytebase, Python |
-| [ELK](./elk/README.md): Elasticsearch, FileBeat, Kibana | Java app Container                    |
-| [etcd](./etcd/README.md)                                | `etcdctl`, Python.                    |
-| [Hazelcast](./hazelcast/README.md)                      | MySQL CDC in Java                     |
-| [Jupyter Notebook](./jupyter/README.md)                 | `ipython-sql`                         |
-| [MinIO](./minio/README.md)                              | Python                                |
-| [MongoDB](./mongodb/README.md)                          | NonCluster, Cluter, stats, `wt`       |
-| [MySQL](./mysql/README.md)                              | 5.7, 8, Replication                   |
-| [PostgreSQL](./postgresql/README.md)                    | pgAdmin                               |
-| [RabbitMQ](./rabbitmq/README.md)                        | Python                                |
-| [Redis](./redis/README.md)                              | TODO                                  |
-| [SQLite](./sqlite/README.md)                            | sqlite-web                            |
-| [Vector](./vector/README.md)                            | Nginx log to ClickHouse               |
+| Application                                                              | Examples                              |
+| :----------------------------------------------------------------------- | :------------------------------------ |
+| [Apache ActiveMQ Artemis](./data-engineering/activemq/README.md)         | `stomp.py`                            |
+| [Apache Airflow](./data-engineering/airflow/README.md)                   | TODO                                  |
+| [Apache Cassandra](./data-engineering/cassandra/README.md)               | CQL                                   |
+| [Apache Flink](./data-engineering/flink/README.md)                       | Python                                |
+| [Apache Hadoop](./data-engineering/hadoop/README.md)                     | pydoop                                |
+| [Apache Kafka](./data-engineering/kafka/README.md)                       | Python, Scala                         |
+| [Apache Samza](./data-engineering/samza/README.md)                       | Java(as library)                      |
+| [Apache Spark](./data-engineering/spark/README.md)                       | `pyspark`, `spark-shell`, `spark-sql` |
+| [Apache TinkerPop](./data-engineering/tinkerpop/README.md)               | HTTP, `gremlin-console`, Alchemy.js   |
+| [ClickHouse](./data-engineering/clickhouse/README.md)                    | `clickhouse-client`, Bytebase, Python |
+| [ELK](./data-engineering/elk/README.md): Elasticsearch, FileBeat, Kibana | Java app Container                    |
+| [etcd](./data-engineering/etcd/README.md)                                | `etcdctl`, Python.                    |
+| [Hazelcast](./data-engineering/hazelcast/README.md)                      | MySQL CDC in Java                     |
+| [Jupyter Notebook](./data-engineering/jupyter/README.md)                 | `ipython-sql`                         |
+| [MinIO](./data-engineering/minio/README.md)                              | Python                                |
+| [MongoDB](./data-engineering/mongodb/README.md)                          | NonCluster, Cluter, stats, `wt`       |
+| [MySQL](./data-engineering/mysql/README.md)                              | 5.7, 8, Replication                   |
+| [PostgreSQL](./data-engineering/postgresql/README.md)                    | pgAdmin                               |
+| [RabbitMQ](./data-engineering/rabbitmq/README.md)                        | Python                                |
+| [Redis](./data-engineering/redis/README.md)                              | TODO                                  |
+| [SQLite](./data-engineering/sqlite/README.md)                            | sqlite-web                            |
+| [Vector](./data-engineering/vector/README.md)                            | Nginx log to ClickHouse               |
 
 ## Ops
 
-| Application                                 | Examples                        |
-| :------------------------------------------ | :------------------------------ |
-| [Apache Skywalking](./skywalking/README.md) | Java app                        |
-| [Archery](./archery/README.md)              | Fix bugs                        |
-| [CoreDNS](./coredns/README.md)              | `etcd` plugin, `dig`            |
-| [Envoy](./envoy/README.md)                  | MongoDB, httpbin, JWT Auth      |
-| [Harbor](./harbor/README.md)                | None                            |
-| [Istio](./istio/README.md)                  | bookinfo                        |
-| [Jaeger](./jaeger/README.md)                | Python                          |
-| [OpenResty](./openresty/README.md)          | `lua-resty-mysql`               |
-| [Portainer](./portainer/README.md)          | -                               |
-| [Prometheus](./prometheus/README.md)        | Exporter, AlertMaanger, Grafana |
+| Application                                     | Examples                        |
+| :---------------------------------------------- | :------------------------------ |
+| [Apache Skywalking](./ops/skywalking/README.md) | Java app                        |
+| [Archery](./ops/archery/README.md)              | Fix bugs                        |
+| [CoreDNS](./ops/coredns/README.md)              | `etcd` plugin, `dig`            |
+| [Envoy](./ops/envoy/README.md)                  | MongoDB, httpbin, JWT Auth      |
+| [Harbor](./ops/harbor/README.md)                | None                            |
+| [Istio](./ops/istio/README.md)                  | bookinfo                        |
+| [Jaeger](./ops/jaeger/README.md)                | Python                          |
+| [OpenResty](./ops/openresty/README.md)          | `lua-resty-mysql`               |
+| [Portainer](./ops/portainer/README.md)          | -                               |
+| [Prometheus](./ops/prometheus/README.md)        | Exporter, AlertMaanger, Grafana |
 
 ## Security
 
-| Application                               | Examples                         |
-| :---------------------------------------- | :------------------------------- |
-| [Keycloak](./keycloak/README.md)          | Admin CLI                        |
-| [OPA: Open Policy Agent](./opa/README.md) | `opa`, Python                    |
-| [OpenLDAP](./openldap/README.md)          | Apache Directory Studio™, Python |
+| Application                                        | Examples                         |
+| :------------------------------------------------- | :------------------------------- |
+| [Keycloak](./security/keycloak/README.md)          | Admin CLI                        |
+| [OPA: Open Policy Agent](./security/opa/README.md) | `opa`, Python                    |
+| [OpenLDAP](./security/openldap/README.md)          | Apache Directory Studio™, Python |
 
 ## Testing
 
-| Application                                  | Examples   |
-| :------------------------------------------- | :--------- |
-| [Flask](./flask/README.md)                   | JSON       |
-| [MailHog](./mailhog/README.md)               | `sendmail` |
-| [Testcontainers](./testcontainers/README.md) | Python     |
+| Application                                          | Examples   |
+| :--------------------------------------------------- | :--------- |
+| [Flask](./testing/flask/README.md)                   | JSON       |
+| [MailHog](./testing/mailhog/README.md)               | `sendmail` |
+| [Testcontainers](./testing/testcontainers/README.md) | Python     |
