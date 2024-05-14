@@ -13,7 +13,14 @@ Environments:
   - Docker Engine v24.0.5
   - Kubernetes v1.27.2
 
-Applications:
+## Benchmark
+
+| Application                                | Examples        |
+| :----------------------------------------- | :-------------- |
+| [Fortio](./fortio/README.md)               | `load`          |
+| [sysbench](./benchmark/sysbench/README.md) | `sysbench-tpcc` |
+
+## Data Engineering Applications
 
 | Application                                             | Examples                              |
 | :------------------------------------------------------ | :------------------------------------ |
@@ -24,42 +31,49 @@ Applications:
 | [Apache Hadoop](./hadoop/README.md)                     | pydoop                                |
 | [Apache Kafka](./kafka/README.md)                       | Python, Scala                         |
 | [Apache Samza](./samza/README.md)                       | Java(as library)                      |
-| [Apache Skywalking](./skywalking/README.md)             | Java app                              |
 | [Apache Spark](./spark/README.md)                       | `pyspark`, `spark-shell`, `spark-sql` |
 | [Apache TinkerPop](./tinkerpop/README.md)               | HTTP, `gremlin-console`, Alchemy.js   |
-| [Archery](./archery/README.md)                          | Fix bugs                              |
 | [ClickHouse](./clickhouse/README.md)                    | `clickhouse-client`, Bytebase, Python |
-| [CoreDNS](./coredns/README.md)                          | `etcd` plugin, `dig`                  |
 | [ELK](./elk/README.md): Elasticsearch, FileBeat, Kibana | Java app Container                    |
-| [Envoy](./envoy/README.md)                              | MongoDB, httpbin, JWT Auth            |
 | [etcd](./etcd/README.md)                                | `etcdctl`, Python.                    |
-| [Flask](./flask/README.md)                              | JSON                                  |
-| [Fortio](./fortio/README.md)                            | `load`                                |
-| [Harbor](./harbor/README.md)                            | None                                  |
 | [Hazelcast](./hazelcast/README.md)                      | MySQL CDC in Java                     |
-| [Istio](./istio/README.md)                              | bookinfo                              |
-| [Jaeger](./jaeger/README.md)                            | Python                                |
 | [Jupyter Notebook](./jupyter/README.md)                 | `ipython-sql`                         |
-| [Keycloak](./keycloak/README.md)                        | Admin CLI                             |
-| [MailHog](./mailhog/README.md)                          | `sendmail`                            |
 | [MinIO](./minio/README.md)                              | Python                                |
 | [MongoDB](./mongodb/README.md)                          | NonCluster, Cluter, stats, `wt`       |
 | [MySQL](./mysql/README.md)                              | 5.7, 8, Replication                   |
-| [OPA: Open Policy Agent](./opa/README.md)               | `opa`, Python                         |
-| [OpenLDAP](./openldap/README.md)                        | Apache Directory Studio™, Python      |
-| [OpenResty](./openresty/README.md)                      | `lua-resty-mysql`                     |
-| [Portainer](./portainer/README.md)                      | -                                     |
 | [PostgreSQL](./postgresql/README.md)                    | pgAdmin                               |
-| [Prometheus](./prometheus/README.md)                    | Exporter, AlertMaanger, Grafana       |
 | [RabbitMQ](./rabbitmq/README.md)                        | Python                                |
 | [Redis](./redis/README.md)                              | TODO                                  |
 | [SQLite](./sqlite/README.md)                            | sqlite-web                            |
-| [Testcontainers](./testcontainers/README.md)            | Python                                |
 | [Vector](./vector/README.md)                            | Nginx log to ClickHouse               |
 
+## Ops
 
-Benchmark:
+| Application                                 | Examples                        |
+| :------------------------------------------ | :------------------------------ |
+| [Apache Skywalking](./skywalking/README.md) | Java app                        |
+| [Archery](./archery/README.md)              | Fix bugs                        |
+| [CoreDNS](./coredns/README.md)              | `etcd` plugin, `dig`            |
+| [Envoy](./envoy/README.md)                  | MongoDB, httpbin, JWT Auth      |
+| [Harbor](./harbor/README.md)                | None                            |
+| [Istio](./istio/README.md)                  | bookinfo                        |
+| [Jaeger](./jaeger/README.md)                | Python                          |
+| [OpenResty](./openresty/README.md)          | `lua-resty-mysql`               |
+| [Portainer](./portainer/README.md)          | -                               |
+| [Prometheus](./prometheus/README.md)        | Exporter, AlertMaanger, Grafana |
 
-| Application                                | Examples        |
-| :----------------------------------------- | :-------------- |
-| [sysbench](./benchmark/sysbench/README.md) | `sysbench-tpcc` |
+## Security
+
+| Application                               | Examples                         |
+| :---------------------------------------- | :------------------------------- |
+| [Keycloak](./keycloak/README.md)          | Admin CLI                        |
+| [OPA: Open Policy Agent](./opa/README.md) | `opa`, Python                    |
+| [OpenLDAP](./openldap/README.md)          | Apache Directory Studio™, Python |
+
+## Testing
+
+| Application                                  | Examples   |
+| :------------------------------------------- | :--------- |
+| [Flask](./flask/README.md)                   | JSON       |
+| [MailHog](./mailhog/README.md)               | `sendmail` |
+| [Testcontainers](./testcontainers/README.md) | Python     |

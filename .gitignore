@@ -1,127 +1,138 @@
 .vscode/
 .venv/
-
-# activemq
-activemq/data/*
-!activemq/data/.gitkeep
-
-# airflow
-airflow/logs/*
-!airflow/logs/.gitkeep
-airflow/mysql/data/*
-!airflow/mysql/data/.gitkeep
-
 __pycache__
 .ipynb_checkpoints
 
-## DAGS
-airflow/dags/*
-!airflow/dags/.gitkeep
-
-# archery
-
+########################################################### Benchmark
 # benchmark
 ## sysbench
 benchmark/sysbench/lua
 benchmark/sysbench/sysbench-tpcc
 
+
+########################################################### Data Engineering
+# activemq
+data-engineering/activemq/data/*
+!data-engineering/activemq/data/.gitkeep
+
+# airflow
+data-engineering/airflow/logs/*
+!data-engineering//logs/.gitkeep
+data-engineering/airflow/mysql/data/*
+!data-engineering/airflow/mysql/data/.gitkeep
+## DAGS
+data-engineering/airflow/dags/*
+!data-engineering/airflow/dags/.gitkeep
+
 # cassandra
-cassandra/data/*
-!cassandra/data/.gitkeep
+data-engineering/cassandra/data/*
+!data-engineering/cassandra/data/.gitkeep
 
 # clickhouse
-clickhouse/data
-clickhouse/logs
-clickhouse/bytebase
-
-# coredns
-coredns/etcd-data
+data-engineering/clickhouse/data
+data-engineering/clickhouse/logs
+data-engineering/clickhouse/bytebase
 
 # etcd
-etcd/etcd-data
-etcd/cluster/etcd-data-*
+data-engineering/etcd/etcd-data
+data-engineering/etcd/cluster/etcd-data-*
 
 # flink
-flink/archive
-flink/log
+data-engineering/flink/archive
+data-engineering/flink/log
 
 # hadoop
-hadoop/clients/python/pydoop/pydoop/
-
-# harbor
-harbor/harbor-offline-installer-v2.10.1.tgz
-harbor/harbor/*
-!harbor/harbor/certs/.gitkeep
-!harbor/harbor/harbor.yml
-!harbor/harbor/docker-compose.yml
+data-engineering/hadoop/clients/python/pydoop/pydoop/
 
 # hazelcast
-hazelcast/data/mysql/data/*
-!hazelcast/data/mysql/data/.gitkeep
-
-# istio
-istio/istio-1.20.3/
+data-engineering/hazelcast/data/mysql/data/*
+!data-engineering/hazelcast/data/mysql/data/.gitkeep
 
 # kafka
-kafka/data/*
-!kafka/data/.gitkeep
-kafka/2.1.1/data
-kafka/2.1.1/zk-data
-
-# keycloak
-keycloak/data/mysql/*
-!keycloak/data/mysql/.gitkeep
-keycloak/codes/
+data-engineering/kafka/data/*
+!data-engineering/kafka/data/.gitkeep
+data-engineering/kafka/2.1.1/data
+data-engineering/kafka/2.1.1/zk-data
 
 # minio
-minio/data/*
-!minio/data/.gitkeep
-minio/clients/python/file_uploader.txt
+data-engineering/minio/data/*
+!data-engineering/minio/data/.gitkeep
+data-engineering/minio/clients/python/file_uploader.txt
 
 # mongodb
-mongodb/non-cluster/data/db/
-!mongodb/non-cluster/data/db/.gitkeep
+data-engineering/mongodb/non-cluster/data/db/
+!data-engineering//non-cluster/data/db/.gitkeep
 
 # mysql
-mysql/data/*
-!mysql/data/.gitkeep
+data-engineering/mysql/data/*
+!data-engineering/mysql/data/.gitkeep
 
-mysql/8/data/*
-!mysql/8/data/.gitkeep
-
-# openldap
-openldap/openldap_data
-
-# openresty
-openresty/modules/lua-resty-mysql-0.27
+data-engineering/mysql/8/data/*
+!data-engineering/mysql/8/data/.gitkeep
 
 # postgresql
-postgresql/data/*
-postgresql/pgadmin/*
-!postgresql/pgadmin/.gitkeep
+data-engineering/postgresql/data/*
+data-engineering/postgresql/pgadmin/*
+!data-engineering/postgresql/pgadmin/.gitkeep
 
 # rabbitmq
-rabbitmq/data/*
-rabbitmq/data/.gitkeep
+data-engineering/rabbitmq/data/*
+data-engineering/rabbitmq/data/.gitkeep
 
 # redis
-redis/data/*
-!redis/data/.gitkeep
+data-engineering/redis/data/*
+!data-engineering/redis/data/.gitkeep
 
 # samza
-samza/samza-hello-samza
+data-engineering/samza/samza-hello-samza
 
 # sqlite
-sqlite/data/*
-!sqlite/data/.gitkeep
+data-engineering/sqlite/data/*
+!data-engineering/sqlite/data/.gitkeep
 
 # tinkerpop
-tinkerpop/console-conf/conf/*
-!tinkerpop/console-conf/conf/remote.yaml
-tinkerpop/server-conf/conf/*
-!tinkerpop/server-conf/conf/gremlin-server.yaml
-!tinkerpop/server-conf/conf/gremlin-server-rest-modern.yaml
+data-engineering/tinkerpop/console-conf/conf/*
+!data-engineering/tinkerpop/console-conf/conf/remote.yaml
+data-engineering/tinkerpop/server-conf/conf/*
+!data-engineering/tinkerpop/server-conf/conf/gremlin-server.yaml
+!data-engineering/tinkerpop/server-conf/conf/gremlin-server-rest-modern.yaml
 
 # vector
-vector/bytebase
-vector/logs
+data-engineering/vector/bytebase
+data-engineering/vector/logs
+
+########################################################### Ops
+# archery
+
+# coredns
+ops/coredns/etcd-data
+
+# harbor
+ops/harbor/harbor-offline-installer-v2.10.1.tgz
+ops/harbor/harbor/*
+!ops/harbor/harbor/certs/.gitkeep
+!ops/harbor/harbor/harbor.yml
+!ops/harbor/harbor/docker-compose.yml
+
+# istio
+ops/istio/istio-1.20.3/
+
+# openresty
+ops/openresty/modules/lua-resty-mysql-0.27
+
+########################################################### Security
+# keycloak
+security/keycloak/data/mysql/*
+!security/keycloak/data/mysql/.gitkeep
+security/keycloak/codes/
+
+# openldap
+security/openldap/openldap_data
+
+########################################################### Testing
+
+# flask
+
+# mailhog
+
+# testcontainers
