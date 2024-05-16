@@ -20,7 +20,7 @@ Environments:
 | [Fortio](./benchmark/fortio/README.md)     | `load`          |
 | [sysbench](./benchmark/sysbench/README.md) | `sysbench-tpcc` |
 
-## Data Engineering Applications
+## Data Engineering
 
 | Application                                                              | Examples                              |
 | :----------------------------------------------------------------------- | :------------------------------------ |
@@ -61,6 +61,7 @@ Environments:
 | [OpenResty](./ops/openresty/README.md)          | `lua-resty-mysql`               |
 | [Portainer](./ops/portainer/README.md)          | -                               |
 | [Prometheus](./ops/prometheus/README.md)        | Exporter, AlertMaanger, Grafana |
+| [Traefik](./ops/traefik/README.md)              | Docker provider                 |
 
 ## Security
 

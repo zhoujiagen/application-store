@@ -1,0 +1,10 @@
+# https://doc.traefik.io/traefik/operations/api/
+api:
+  insecure: true
+
+# https://doc.traefik.io/traefik/providers/docker/#provider-configuration
+providers:
+  # https://doc.traefik.io/traefik/providers/docker/
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    network: devops-network
