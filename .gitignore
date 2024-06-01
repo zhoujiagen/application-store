@@ -2,6 +2,7 @@
 .venv/
 __pycache__
 .ipynb_checkpoints
+node_modules
 
 ########################################################### Benchmark
 # benchmark
@@ -69,6 +70,10 @@ data-engineering/mysql/data/*
 
 data-engineering/mysql/8/data/*
 !data-engineering/mysql/8/data/.gitkeep
+
+# neo4j
+data-engineering/neo4j/data
+data-engineering/neo4j/desktop.txt
 
 # postgresql
 data-engineering/postgresql/data/*

@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  neo4j:
+    image: neo4j:5.20
+    container_name: neo4j
+    restart: "always"
+    env_file:
+      - .env
+    ports:
+      - 7474:7474
+      - 7687:7687
+    volumes:
+      - ./data:/data
+    networks:
+      - devops-network
+
+networks:
+  devops-network:
+    external: true
