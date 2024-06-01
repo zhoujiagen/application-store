@@ -79,3 +79,21 @@ Environments:
 | [Flask](./testing/flask/README.md)                   | JSON       |
 | [MailHog](./testing/mailhog/README.md)               | `sendmail` |
 | [Testcontainers](./testing/testcontainers/README.md) | Python     |
+
+## Applications
+
+- [Vert.x in Action](https://github.com/zhoujiagen/learning-cloudnative/tree/main/compute/java-reactive/vertx/vertx-in-action-application/ops/components)
+  - MailHog
+  - PostgreSQL
+  - MongoDB
+  - ActiveMQ
+  - Kafka
+- [Cloud Native Spring in Action](https://github.com/zhoujiagen/learning-cloudnative/tree/main/compute/java-reactive/spring/book-store) 
+  - PostgreSQL
+- [GraphQL in Action](https://github.com/zhoujiagen/learning-cloudnative/tree/main/networking/graphql/ex-azdev/ops)
+  - PostgreSQL
+  - MongoDB
+- [Event Streams in Action](https://github.com/zhoujiagen/learning-cloudnative/tree/main/compute/event-streams/event-streams-in-action)
+  - Samza
+- [Single Page Web Applications](https://github.com/zhoujiagen/learning-frontend-stack/tree/main/spa/spa-server/ops)
+  - MongoDB
