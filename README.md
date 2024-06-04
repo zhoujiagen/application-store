@@ -97,3 +97,5 @@ Environments:
   - Samza
 - [Single Page Web Applications](https://github.com/zhoujiagen/learning-frontend-stack/tree/main/spa/spa-server/ops)
   - MongoDB
+- [Full Stack GraphQL Applications](https://github.com/zhoujiagen/learning-cloudnative/tree/main/networking/graphql/full-stack-graphql-applications)
+  - Neo4j
