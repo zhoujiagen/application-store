@@ -1,6 +1,5 @@
 version: '3.8'
 
-# TODO: add health check
 services:
   minio:
     image: quay.io/minio/minio
@@ -9,9 +8,16 @@ services:
     env_file:
       - .env
     command: ["server", "/data", "--console-address", ":9001"]
+    # https://github.com/minio/minio/issues/18389
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+      start_period: 10s
     ports:
-      - "9000:9000"
-      - "9001:9001"
+      - "19000:9000"
+      - "19001:9001"
     volumes:
       - ./data:/data
     networks:

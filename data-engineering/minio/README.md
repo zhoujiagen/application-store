@@ -1,5 +1,4 @@
 # MinIO
-
 - https://min.io/docs/minio/container/index.html
 
 Access `http://127.0.0.1:9001/` with `devops/devops+minio`.
