@@ -1,0 +1,67 @@
+version: '3.8'
+
+x-server-common:
+ &server-common
+    image: redis:7
+    restart: "always"
+    command:
+      - /etc/redis/redis.conf
+    healthcheck:
+      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
+    networks:
+      - devops-network
+    privileged: true
+
+services:
+  redis-7000:
+    <<: *server-common
+    container_name: redis-7000
+    volumes:
+      - "./7000:/data"
+      - "./7000.conf:/etc/redis/redis.conf"
+    ports:
+      - 7000:7000
+  redis-7001:
+    <<: *server-common
+    container_name: redis-7001
+    volumes:
+      - "./7001:/data"
+      - "./7001.conf:/etc/redis/redis.conf"
+    ports:
+      - 7001:7001
+  redis-7002:
+    <<: *server-common
+    container_name: redis-7002
+    volumes:
+      - "./7002:/data"
+      - "./7002.conf:/etc/redis/redis.conf"
+    ports:
+      - 7002:7002
+  redis-7003:
+    <<: *server-common
+    container_name: redis-7003
+    volumes:
+      - "./7003:/data"
+      - "./7003.conf:/etc/redis/redis.conf"
+    ports:
+      - 7003:7003
+  redis-7004:
+    <<: *server-common
+    container_name: redis-7004
+    volumes:
+      - "./7004:/data"
+      - "./7004.conf:/etc/redis/redis.conf"
+    ports:
+      - 7004:7004
+  redis-7005:
+    <<: *server-common
+    container_name: redis-7005
+    volumes:
+      - "./7005:/data"
+      - "./7005.conf:/etc/redis/redis.conf"
+    ports:
+      - 7005:7005
+
+networks:
+  devops-network:
+    external: true

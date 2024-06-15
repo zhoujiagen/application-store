@@ -44,7 +44,7 @@ Environments:
 | [Neo4j](./data-engineering/neo4j/README.md)                              | JavaScript                            |
 | [PostgreSQL](./data-engineering/postgresql/README.md)                    | pgAdmin                               |
 | [RabbitMQ](./data-engineering/rabbitmq/README.md)                        | Python                                |
-| [Redis](./data-engineering/redis/README.md)                              | TODO                                  |
+| [Redis](./data-engineering/redis/README.md)                              | Single, Cluster                       |
 | [SQLite](./data-engineering/sqlite/README.md)                            | sqlite-web                            |
 | [Vector](./data-engineering/vector/README.md)                            | Nginx log to ClickHouse               |
 

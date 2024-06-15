@@ -85,8 +85,13 @@ data-engineering/rabbitmq/data/*
 data-engineering/rabbitmq/data/.gitkeep
 
 # redis
-data-engineering/redis/data/*
-!data-engineering/redis/data/.gitkeep
+data-engineering/redis/single/data
+data-engineering/redis/cluster/7000
+data-engineering/redis/cluster/7001
+data-engineering/redis/cluster/7002
+data-engineering/redis/cluster/7003
+data-engineering/redis/cluster/7004
+data-engineering/redis/cluster/7005
 
 # samza
 data-engineering/samza/samza-hello-samza
