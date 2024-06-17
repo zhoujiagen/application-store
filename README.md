@@ -42,6 +42,7 @@ Environments:
 | [MongoDB](./data-engineering/mongodb/README.md)                          | NonCluster, Cluter, stats, `wt`       |
 | [MySQL](./data-engineering/mysql/README.md)                              | 5.7, 8, Replication                   |
 | [Neo4j](./data-engineering/neo4j/README.md)                              | JavaScript                            |
+| [Apache Pinot](./data-engineering/pinot/README.md)                       | Batch, Stream                         |
 | [PostgreSQL](./data-engineering/postgresql/README.md)                    | pgAdmin                               |
 | [RabbitMQ](./data-engineering/rabbitmq/README.md)                        | Python                                |
 | [Redis](./data-engineering/redis/README.md)                              | Single, Cluster                       |

@@ -1,0 +1,95 @@
+version: '3.8'
+
+# https://docs.pinot.apache.org/basics/getting-started/running-pinot-in-docker
+# TODO: data, health check
+services:
+  pinot-zookeeper:
+    image: zookeeper:3.5.6
+    container_name: pinot-zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - devops-network
+
+  pinot-controller:
+    image: apachepinot/pinot:1.1.0
+    command: "StartController -zkAddress pinot-zookeeper:2181"
+    # batch processing
+    # command: "QuickStart -type batch"
+    container_name: pinot-controller
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+    environment:
+      JAVA_OPTS: "${CONTROLLER_JAVA_OPTS}"
+    volumes:
+      - ./examples:/tmp/examples
+    depends_on:
+      - pinot-zookeeper
+    networks:
+      - devops-network
+
+  pinot-broker:
+    image: apachepinot/pinot:1.1.0
+    command: "StartBroker -zkAddress pinot-zookeeper:2181"
+    restart: unless-stopped
+    container_name: "pinot-broker"
+    ports:
+      - "8099:8099"
+    environment:
+      JAVA_OPTS: "${BROKER_JAVA_OPTS}"
+    depends_on:
+      - pinot-controller
+    networks:
+      - devops-network
+
+  pinot-server:
+    image: apachepinot/pinot:1.1.0
+    command: "StartServer -zkAddress pinot-zookeeper:2181"
+    restart: unless-stopped
+    container_name: "pinot-server"
+    ports:
+      - "8098:8098"
+    environment:
+      JAVA_OPTS: "${SERVER_JAVA_OPTS}"
+    depends_on:
+      - pinot-broker
+    networks:
+      - devops-network
+
+  # https://docs.pinot.apache.org/basics/data-import/pinot-stream-ingestion/import-from-apache-kafka#kafka-ingestion-guidelines
+  kafka-broker:
+    image: bitnami/kafka:2.0.0
+    container_name: kafka-broker
+    restart: "always"
+    env_file:
+      - .env
+    ports:
+      - 9092:9092
+      - 9094:9094
+    volumes:
+      - ./kafka-data:/bitnami/kafka
+      - ./examples/rawdata:/tmp/examples/raw_data
+    depends_on:
+      - pinot-zookeeper
+    networks:
+      - devops-network
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka-ui
+    ports:
+      - 18080:8080
+    environment:
+      DYNAMIC_CONFIG_ENABLED: 'true'
+    depends_on:
+      - kafka-broker
+    networks:
+      - devops-network
+
+networks:
+  devops-network:
+    external: true

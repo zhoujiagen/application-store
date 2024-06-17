@@ -75,6 +75,12 @@ data-engineering/mysql/8/data/*
 data-engineering/neo4j/data
 data-engineering/neo4j/desktop.txt
 
+# pinot
+data-engineering/pinot/bin
+data-engineering/pinot/conf
+data-engineering/pinot/kafka-data
+data-engineering/pinot/examples/segments
+
 # postgresql
 data-engineering/postgresql/data/*
 data-engineering/postgresql/pgadmin/*
