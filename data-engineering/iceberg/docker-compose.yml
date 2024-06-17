@@ -1,0 +1,70 @@
+
+version: '3.8'
+
+# https://iceberg.apache.org/spark-quickstart/#spark-and-iceberg-quickstart
+services:
+  spark-iceberg:
+    image: tabulario/spark-iceberg:3.5.1_1.5.0
+    container_name: spark-iceberg
+    build: spark/
+    networks:
+      devops-network:
+    depends_on:
+      - rest
+      - minio
+    volumes:
+      - ./warehouse:/home/iceberg/warehouse
+      - ./notebooks:/home/iceberg/notebooks/notebooks
+    env_file:
+      - .env
+    ports:
+      - 8888:8888
+      - 8080:8080
+      - 10000:10000
+      - 10001:10001
+  
+  rest:
+    image: tabulario/iceberg-rest:1.5.0
+    container_name: iceberg-rest
+    networks:
+      devops-network:
+    ports:
+      - 8181:8181
+    env_file:
+      - .env
+  
+  minio:
+    image: minio/minio
+    container_name: minio
+    env_file:
+      - .env
+    networks:
+      devops-network:
+        aliases:
+          - warehouse.minio
+    ports:
+      - 9001:9001
+      - 9000:9000
+    command: ["server", "/data", "--console-address", ":9001"]
+  
+  mc:
+    depends_on:
+      - minio
+    image: minio/mc
+    container_name: mc
+    networks:
+      devops-network:
+    env_file:
+      - .env
+    entrypoint: >
+      /bin/sh -c "
+      until (/usr/bin/mc config host add minio http://minio:9000 ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD}) do echo '...waiting...' && sleep 1; done;
+      /usr/bin/mc rm -r --force minio/warehouse;
+      /usr/bin/mc mb minio/warehouse;
+      /usr/bin/mc policy set public minio/warehouse;
+      tail -f /dev/null
+      "
+
+networks:
+  devops-network:
+    external: true

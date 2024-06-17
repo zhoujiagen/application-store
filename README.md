@@ -37,6 +37,7 @@ Environments:
 | [ELK](./data-engineering/elk/README.md): Elasticsearch, FileBeat, Kibana | Java app Container                    |
 | [etcd](./data-engineering/etcd/README.md)                                | `etcdctl`, Python.                    |
 | [Hazelcast](./data-engineering/hazelcast/README.md)                      | MySQL CDC in Java                     |
+| [Apache Iceberg](./data-engineering/iceberg/README.md)                   | Spark                                 |
 | [Jupyter Notebook](./data-engineering/jupyter/README.md)                 | `ipython-sql`                         |
 | [MinIO](./data-engineering/minio/README.md)                              | Python                                |
 | [MongoDB](./data-engineering/mongodb/README.md)                          | NonCluster, Cluter, stats, `wt`       |

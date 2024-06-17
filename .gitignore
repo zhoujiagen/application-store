@@ -49,6 +49,8 @@ data-engineering/hadoop/clients/python/pydoop/pydoop/
 data-engineering/hazelcast/data/mysql/data/*
 !data-engineering/hazelcast/data/mysql/data/.gitkeep
 
+# iceberg
+
 # kafka
 data-engineering/kafka/data/*
 !data-engineering/kafka/data/.gitkeep
