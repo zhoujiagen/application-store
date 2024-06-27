@@ -13,16 +13,19 @@ services:
       - rest
       - minio
     volumes:
+      - ./conf/spark-defaults.conf:/opt/spark/conf/spark-defaults.conf
       - ./warehouse:/home/iceberg/warehouse
       - ./notebooks:/home/iceberg/notebooks/notebooks
     env_file:
       - .env
     ports:
-      - 8888:8888
-      - 8080:8080
+      - 8888:8888 # notebook
+      - 8080:8080 # Spark UI
       - 10000:10000
       - 10001:10001
   
+  # https://hub.docker.com/r/tabulario/iceberg-rest
+  # Dockerfile: https://github.com/tabular-io/iceberg-rest-image/blob/master/Dockerfile
   rest:
     image: tabulario/iceberg-rest:1.5.0
     container_name: iceberg-rest
@@ -32,6 +35,8 @@ services:
       - 8181:8181
     env_file:
       - .env
+    volumes:
+      - ./rest-data:/tmp
   
   minio:
     image: minio/minio
@@ -46,24 +51,27 @@ services:
       - 9001:9001
       - 9000:9000
     command: ["server", "/data", "--console-address", ":9001"]
-  
-  mc:
-    depends_on:
-      - minio
-    image: minio/mc
-    container_name: mc
-    networks:
-      devops-network:
-    env_file:
-      - .env
-    entrypoint: >
-      /bin/sh -c "
-      until (/usr/bin/mc config host add minio http://minio:9000 ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD}) do echo '...waiting...' && sleep 1; done;
-      /usr/bin/mc rm -r --force minio/warehouse;
-      /usr/bin/mc mb minio/warehouse;
-      /usr/bin/mc policy set public minio/warehouse;
-      tail -f /dev/null
-      "
+    volumes:
+      - ./minio-data:/data
+
+  # first touch
+  # mc:
+  #   depends_on:
+  #     - minio
+  #   image: minio/mc
+  #   container_name: mc
+  #   networks:
+  #     devops-network:
+  #   env_file:
+  #     - .env
+  #   entrypoint: >
+  #     /bin/sh -c "
+  #     until (/usr/bin/mc config host add minio http://minio:9000 ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD}) do echo '...waiting...' && sleep 1; done;
+  #     /usr/bin/mc rm -r --force minio/warehouse;
+  #     /usr/bin/mc mb minio/warehouse;
+  #     /usr/bin/mc policy set public minio/warehouse;
+  #     tail -f /dev/null
+  #     "
 
 networks:
   devops-network:

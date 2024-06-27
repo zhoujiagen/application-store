@@ -3,9 +3,34 @@
 
 ## Spark
 - https://iceberg.apache.org/spark-quickstart/#spark-and-iceberg-quickstart
+- Dockerfile: https://github.com/tabular-io/docker-spark-iceberg/blob/main/spark/Dockerfile
 
 ```shell
-# spark-sql
+$ pwd
+/opt/spark
+$ cat conf/spark-defaults.conf
+...
+# Example:
+spark.sql.extensions                   org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions
+spark.sql.catalog.demo                 org.apache.iceberg.spark.SparkCatalog
+spark.sql.catalog.demo.type            rest
+spark.sql.catalog.demo.uri             http://rest:8181
+spark.sql.catalog.demo.io-impl         org.apache.iceberg.aws.s3.S3FileIO
+spark.sql.catalog.demo.warehouse       s3://warehouse/wh/
+spark.sql.catalog.demo.s3.endpoint     http://minio:9000
+spark.sql.defaultCatalog               demo
+spark.eventLog.enabled                 true
+spark.eventLog.dir                     /home/iceberg/spark-events
+spark.history.fs.logDirectory          /home/iceberg/spark-events
+spark.sql.catalogImplementation        in-memory
+
+# copy configuration
+$ docker container cp spark-iceberg:/opt/spark/conf conf
+
+```
+
+```shell
+$ spark-sql
 spark-sql ()> CREATE TABLE demo.nyc.taxis
             > (
             >   vendor_id bigint,

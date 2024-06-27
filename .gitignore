@@ -50,6 +50,10 @@ data-engineering/hazelcast/data/mysql/data/*
 !data-engineering/hazelcast/data/mysql/data/.gitkeep
 
 # iceberg
+data-engineering/iceberg/conf/*
+!data-engineering/iceberg/conf/spark-defaults.conf
+data-engineering/iceberg/minio-data
+data-engineering/iceberg/rest-data
 
 # kafka
 data-engineering/kafka/data/*
