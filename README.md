@@ -56,6 +56,7 @@ Environments:
 | :---------------------------------------------- | :------------------------------ |
 | [Apache Skywalking](./ops/skywalking/README.md) | Java app                        |
 | [Archery](./ops/archery/README.md)              | Fix bugs                        |
+| [Conductor](./ops/conductor/README.md)          | Python                          |
 | [CoreDNS](./ops/coredns/README.md)              | `etcd` plugin, `dig`            |
 | [Envoy](./ops/envoy/README.md)                  | MongoDB, httpbin, JWT Auth      |
 | [Harbor](./ops/harbor/README.md)                | None                            |
@@ -65,6 +66,7 @@ Environments:
 | [Portainer](./ops/portainer/README.md)          | -                               |
 | [Prometheus](./ops/prometheus/README.md)        | Exporter, AlertMaanger, Grafana |
 | [Traefik](./ops/traefik/README.md)              | Docker provider                 |
+| [xxl-job](./ops/xxljob/README.md)               | Java                            |
 
 ## Security
 

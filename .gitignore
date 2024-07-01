@@ -126,6 +126,9 @@ data-engineering/vector/logs
 ########################################################### Ops
 # archery
 
+# conductor
+ops/conductor/conductor/
+
 # coredns
 ops/coredns/etcd-data
 
@@ -141,6 +144,10 @@ ops/istio/istio-1.20.3/
 
 # openresty
 ops/openresty/modules/lua-resty-mysql-0.27
+
+# xxl-job
+ops/xxljob/applogs
+ops/xxljob/data
 
 ########################################################### Security
 # keycloak
