@@ -226,3 +226,10 @@ mysql> select version();
 +-----------+
 1 row in set (0.00 sec)
 ```
+
+## Spatial data
+- tools: https://www.box3.cn/tools/lbs.html
+- data types: https://dev.mysql.com/doc/refman/5.7/en/spatial-types.html
+- functions: https://dev.mysql.com/doc/refman/5.7/en/spatial-function-reference.html
+
+Action: [ex-spatial.sql](./ex-spatial.sql)
