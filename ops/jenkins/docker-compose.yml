@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  # https://github.com/jenkinsci/docker/blob/master/README.md
+  jenkins:
+    # image: jenkins/jenkins:lts-jdk17
+    image: jenkins:lts-jdk17-maven
+    container_name: jenkins
+    restart: always
+    privileged: true
+    volumes:
+      - ./data:/var/jenkins_home
+      - ./root-mvn-repo:/.m2
+      - ./docker:/var/lib/docker
+    ports: # DEPLOY_ENV
+      - 18080:8080
+      - 50000:50000
+    networks:
+      - devops-network
+    healthcheck:
+      test: curl http://localhost:8080/login -o /dev/null
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+networks:
+  devops-network:
+    external: true

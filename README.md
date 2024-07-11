@@ -62,6 +62,7 @@ Environments:
 | [Harbor](./ops/harbor/README.md)                | None                            |
 | [Istio](./ops/istio/README.md)                  | bookinfo                        |
 | [Jaeger](./ops/jaeger/README.md)                | Python                          |
+| [Jenkins](./ops/jenkins/README.md)              | -                               |
 | [OpenResty](./ops/openresty/README.md)          | `lua-resty-mysql`               |
 | [Portainer](./ops/portainer/README.md)          | -                               |
 | [Prometheus](./ops/prometheus/README.md)        | Exporter, AlertMaanger, Grafana |

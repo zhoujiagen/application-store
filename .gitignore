@@ -34,6 +34,12 @@ data-engineering/clickhouse/data
 data-engineering/clickhouse/logs
 data-engineering/clickhouse/bytebase
 
+# elk
+data-engineering/elk/es_data
+
+data-engineering/elk/docs
+data-engineering/elk/elasticsearch
+
 # etcd
 data-engineering/etcd/etcd-data
 data-engineering/etcd/cluster/etcd-data-*
@@ -73,6 +79,7 @@ data-engineering/mongodb/non-cluster/data/db/
 # mysql
 data-engineering/mysql/data/*
 !data-engineering/mysql/data/.gitkeep
+data-engineering/mysql/repl/data
 
 data-engineering/mysql/8/data/*
 !data-engineering/mysql/8/data/.gitkeep
@@ -105,6 +112,8 @@ data-engineering/redis/cluster/7003
 data-engineering/redis/cluster/7004
 data-engineering/redis/cluster/7005
 
+data-engineering/redis/redis
+
 # samza
 data-engineering/samza/samza-hello-samza
 
@@ -128,6 +137,8 @@ data-engineering/vector/logs
 
 # conductor
 ops/conductor/conductor/
+ops/conductor/logs/
+ops/conductor/conductor.mwb.bak
 
 # coredns
 ops/coredns/etcd-data
@@ -141,6 +152,9 @@ ops/harbor/harbor/*
 
 # istio
 ops/istio/istio-1.20.3/
+
+# jenkins
+ops/jenkins/data
 
 # openresty
 ops/openresty/modules/lua-resty-mysql-0.27
