@@ -3,6 +3,7 @@ version: '3.8'
 
 services:
 
+  # Commented for local running
   conductor-server:
     container_name: conductor-server
     image: conductor:server
@@ -21,6 +22,7 @@ services:
       - 5000:5000
     volumes: # DEPLOY_DEV: local build hack
       - ./conductor/server/build/libs/conductor-server-boot.jar:/app/libs/conductor-server.jar
+      - ./logs:/app/logs
     healthcheck:
       test: [ "CMD", "curl","-I" ,"-XGET", "http://localhost:8080/health" ]
       interval: 60s
@@ -45,6 +47,7 @@ services:
 
   conductor-mysql:
     image: mysql:8.0.36
+    container_name: conductor-mysql
     env_file:
       - .env
     volumes:
@@ -63,17 +66,19 @@ services:
 
   conductor-redis:
     image: redis:6.2.3-alpine
+    container_name: conductor-redis
     volumes:
       - ./redis.conf:/usr/local/etc/redis/redis.conf
     networks:
       - devops-network
     ports:
-      - 7379:6379
+      - 6379:6379
     healthcheck:
       test: [ "CMD", "redis-cli","ping" ]
 
   conductor-elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.17.11
+    container_name: conductor-elasticsearch
     env_file:
       - .env
     volumes:
@@ -81,7 +86,7 @@ services:
     networks:
       - devops-network
     ports:
-      - 9201:9200
+      - 9200:9200
     healthcheck:
       test: curl http://localhost:9200/_cluster/health -o /dev/null
       interval: 5s
@@ -92,6 +97,19 @@ services:
       options:
         max-size: "1k"
         max-file: "3"
+
+  conductor-kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.11
+    container_name: conductor-kibana
+    restart: always
+    volumes:
+      - ./kibana.yml:/usr/share/kibana/config/kibana.yml
+    ports: # DEPLOY_ENV
+      - 5601:5601
+    networks:
+      - devops-network
+    depends_on:
+      - conductor-elasticsearch
 
 volumes:
   conductor_mysql:

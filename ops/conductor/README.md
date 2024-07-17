@@ -14,7 +14,8 @@ Access UI: `http://localhost:5000`.
 Access Swagger doc: `http://localhost:8080/swagger-ui/index.html`.
 
 ## tutorial
-### workflow
+
+### Manual
 - https://docs.conductor-oss.org/devguide/labs/first-workflow.html
 
 1. create workflow: 'Definitions' > 'New Workflow Definition'.
@@ -163,23 +164,34 @@ See 'Executions' > 'Worklow Input/Output', example:
 }
 ```
 
+### REST API
+
+see [rest-api.ipynb](./clients/rest-api.ipynb).
+
 ## Clients
 ### Python
 - https://github.com/conductor-sdk/conductor-python/blob/main/README.md
 
 ```shell
 $ python --version
-Python 3.11.5
+Python 3.12.4
 $ python -m virtualenv .venv
 $ source .venv/bin/activate
-# $ source .venv/Scripts/activate # Windows
 $ pip freeze > requirements.txt
 ```
 
 ```shell
 $ python helloworld.py
-...
-2024-07-01 12:26:45,585 [24444] conductor.client.automator.task_runner INFO     Polling task greet with domain None with polling interval 0.1
+16:26:46,183 [3825] conductor.client.automator.task_handler INFO     created worker with name=greet and domain=None
+16:26:46,183 [3825] conductor.client.automator.task_handler INFO     TaskHandler initialized
+16:26:46,183 [3825] conductor.client.automator.task_handler INFO     Starting worker processes...
+16:26:46,185 [3825] conductor.client.automator.task_runner INFO     Polling task greet with domain None with polling interval 0.1
+16:26:46,185 [3825] conductor.client.automator.task_handler INFO     Started 2 TaskRunner process
+16:26:46,185 [3825] conductor.client.automator.task_handler INFO     Started all processes
+16:26:46,185 [3825] conductor.client.automator.task_runner INFO     Polling task greet with domain None with polling interval 0.1
+workflow execution: http://localhost:5000/execution/10864d60-a4fa-4edd-9f80-2b275f77c2b0
+
+16:26:49,218 [3825] conductor.client.automator.task_handler INFO     Stopped worker processes...
 
 # 'Workbench'
 ## Workflow Name: greetings

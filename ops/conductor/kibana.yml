@@ -1,0 +1,8 @@
+# https://www.elastic.co/guide/en/kibana/7.10/settings.html
+server.name: conductor-kibana
+server.host: conductor-kibana
+
+elasticsearch.hosts: ["http://conductor-elasticsearch:9200"]
+elasticsearch.username: "kibana"
+elasticsearch.password: "kibana"
+elasticsearch.ssl.verificationMode: none
