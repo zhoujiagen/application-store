@@ -34,7 +34,7 @@ Environments:
 | [Apache Spark](./data-engineering/spark/README.md)                       | `pyspark`, `spark-shell`, `spark-sql` |
 | [Apache TinkerPop](./data-engineering/tinkerpop/README.md)               | HTTP, `gremlin-console`, Alchemy.js   |
 | [ClickHouse](./data-engineering/clickhouse/README.md)                    | `clickhouse-client`, Bytebase, Python |
-| [ELK](./data-engineering/elk/README.md): Elasticsearch, FileBeat, Kibana | Java app Container                    |
+| [Elasticsearch](./data-engineering/elastic/README.md): Elasticsearch, FileBeat, Kibana | Java app Container                    |
 | [etcd](./data-engineering/etcd/README.md)                                | `etcdctl`, Python.                    |
 | [Hazelcast](./data-engineering/hazelcast/README.md)                      | MySQL CDC in Java                     |
 | [Apache Iceberg](./data-engineering/iceberg/README.md)                   | Spark                                 |

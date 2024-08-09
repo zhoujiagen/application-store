@@ -1,8 +1,0 @@
-# https://www.elastic.co/guide/en/kibana/7.10/settings.html
-server.name: apm-kibana
-server.host: kibana
-
-elasticsearch.hosts: ["http://apm-es:9200"]
-elasticsearch.username: "kibana"
-elasticsearch.password: "xxx"
-elasticsearch.ssl.verificationMode: none

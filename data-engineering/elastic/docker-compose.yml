@@ -1,0 +1,35 @@
+version: "3.8"
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.11
+    container_name: elasticsearch
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./data:/usr/share/elasticsearch/data
+      - ./logs:/usr/share/elasticsearch/logs
+      - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./certs/elastic-certificates.p12:/usr/share/elasticsearch/config/elastic-certificates.p12
+      - ./certs/elasticsearch.keystore:/usr/share/elasticsearch/config/elasticsearch.keystore
+    ports: # DEPLOY_ENV
+      - 9200:9200
+    networks:
+      - devops-network
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.11
+    container_name: kibana
+    restart: unless-stopped
+    volumes:
+      - ./kibana.yml:/usr/share/kibana/config/kibana.yml
+    ports: # DEPLOY_ENV
+      - 5601:5601
+    networks:
+      - devops-network
+    depends_on:
+      - elasticsearch
+
+networks:
+  devops-network:
+    external: true

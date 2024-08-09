@@ -1,40 +1,51 @@
-# ELK
+# Elastic
+- https://www.docker.elastic.co/
+- https://github.com/elastic/elasticsearch/tree/7.17/distribution/docker
 
 ```shell
 ├── docker-compose.yml                  # elasticsearch, kibana
-├── es_data                             # elasticsearch data
+├── data                                # elasticsearch data
 ├── filebeat.yml                        # filebeat settings
 ├── filebeat-docker-compose.yml         # filebeat
 └── kibana.yml                          # kibana settings
 ```
 
-
 ## Security settings
+- https://www.elastic.co/guide/en/elasticsearch/reference/7.17/security-basic-setup.html
+- https://www.elastic.co/guide/en/elasticsearch/reference/7.17/configuring-tls-docker.html
 
 ```shell
-root@localhost:/opt/apm# docker exec -it apm-es bash
-[root@b84934df2e0f elasticsearch]# bin/elasticsearch-certutil ca
-Please enter the desired output file [elastic-stack-ca.p12]:
-Enter password for elastic-stack-ca.p12 : 
+$ pwd
+/usr/share/elasticsearch
 
-[root@b84934df2e0f elasticsearch]# bin/elasticsearch-certutil cert --ca elastic-stack-ca.p12
+# CA
+$ bin/elasticsearch-certutil ca
+Please enter the desired output file [elastic-stack-ca.p12]:
+Enter password for elastic-stack-ca.p12 : < esca+apm
+# certificate
+$ bin/elasticsearch-certutil cert --ca elastic-stack-ca.p12
 ...
-Enter password for CA (elastic-stack-ca.p12) :
+Enter password for CA (elastic-stack-ca.p12) : < esca+apm
 Please enter the desired output file [elastic-certificates.p12]:
-Enter password for elastic-certificates.p12 :
+Enter password for elastic-certificates.p12 : < esc+apm
 
 Certificates written to /usr/share/elasticsearch/elastic-certificates.p12
 ...
 
-[root@b84934df2e0f elasticsearch]# ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
-Enter value for xpack.security.transport.ssl.keystore.secure_password:
-[root@b84934df2e0f elasticsearch]# ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
-Enter value for xpack.security.transport.ssl.truststore.secure_password:
+# keystore
+$ ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
+Enter value for xpack.security.transport.ssl.keystore.secure_password: < esc+apm
+$ ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
+Enter value for xpack.security.transport.ssl.truststore.secure_password: < esc+apm
 # store in config/elasticsearch.keystore
+
+$ chown elasticsearch *.p12
+$ mkdir -p 
+$ cp *.p12 data/
 ```
 
 ```shell
-[root@288c6f8885c0 elasticsearch]# bin/elasticsearch-setup-passwords  interactive
+$ bin/elasticsearch-setup-passwords interactive
 Initiating the setup of passwords for reserved users elastic,apm_system,kibana,kibana_system,logstash_system,beats_system,remote_monitoring_user.
 You will be prompted to enter passwords as the process progresses.
 Please confirm that you would like to continue [y/N]y
@@ -61,9 +72,9 @@ Changed password for user [remote_monitoring_user]
 Changed password for user [elastic]
 
 
-[root@288c6f8885c0 elasticsearch]# bin/elasticsearch-users useradd apm
-Enter new password:
+$ bin/elasticsearch-users useradd kibana
+Enter new password: < kibana
 Retype new password:
-[root@288c6f8885c0 elasticsearch]# bin/elasticsearch-users roles -a superuser apm
+$ bin/elasticsearch-users roles -a superuser kibana
 # store in config/users, config/user_roles
 ```

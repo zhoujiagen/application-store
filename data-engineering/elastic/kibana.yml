@@ -1,0 +1,9 @@
+# https://www.elastic.co/guide/en/kibana/7.10/settings.html
+server.name: kibana
+server.host: kibana
+
+# DEPLOY_ENV
+elasticsearch.hosts: ["http://elasticsearch:9200"]
+elasticsearch.username: "kibana_system"
+elasticsearch.password: "es+apm"
+elasticsearch.ssl.verificationMode: none
