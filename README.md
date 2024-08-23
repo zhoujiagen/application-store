@@ -59,6 +59,7 @@ Environments:
 | [Conductor](./ops/conductor/README.md)          | Python                          |
 | [CoreDNS](./ops/coredns/README.md)              | `etcd` plugin, `dig`            |
 | [Envoy](./ops/envoy/README.md)                  | MongoDB, httpbin, JWT Auth      |
+| [Flowable REST](./ops/flowable/README.md)       | -                               |
 | [Harbor](./ops/harbor/README.md)                | None                            |
 | [Istio](./ops/istio/README.md)                  | bookinfo                        |
 | [Jaeger](./ops/jaeger/README.md)                | Python                          |

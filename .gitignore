@@ -149,6 +149,9 @@ ops/conductor/conductor.mwb.bak
 # coredns
 ops/coredns/etcd-data
 
+# flowable
+ops/flowable/data
+
 # harbor
 ops/harbor/harbor-offline-installer-v2.10.1.tgz
 ops/harbor/harbor/*
