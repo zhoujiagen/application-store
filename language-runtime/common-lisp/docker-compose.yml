@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  sbcl:
+    image: clfoundation/sbcl
+    container_name: sbcl
+    restart: "always"
+    entrypoint: "tail -f /dev/null"
+    networks:
+      - devops-network
+
+networks:
+  devops-network:
+    external: true
