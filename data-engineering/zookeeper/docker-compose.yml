@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  zookeeper:
+    image: zookeeper
+    container_name: zookeeper
+    restart: "unless-stopped"
+    networks:
+      - devops-network
+    ports:
+      - 2181:2181
+
+  zookezoonavigator:
+    image: elkozmon/zoonavigator:latest
+    container_name: zoonavigator
+    restart: "unless-stopped"
+    # entrypoint: "tail -f /dev/null"
+    networks:
+      - devops-network
+    ports:
+      - 9000:9000
+
+networks:
+  devops-network:
+    external: true
