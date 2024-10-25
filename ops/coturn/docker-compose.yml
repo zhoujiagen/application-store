@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0.36
+    container_name: mysql
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./coturn/docker/mysql/init-coturn-db.sql:/docker-entrypoint-initdb.d/init-coturn-db.sql:ro
+      - ./coturn/docker/mysql/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+      - ./mysql-data:/var/lib/mysql
+    networks:
+      - devops-network
+    ports:
+      - 3306:3306
+
+  coturn:
+    image: coturn/coturn
+    container_name: coturn
+    restart: unless-stopped
+    # env_file:
+    #   - .env
+    ports:
+      - 3478:3478
+      - 3478:3478/udp
+      - 5349:5349
+      - 5349:5349/udp
+      - "80:80"
+      - "80:80/udp"
+      - "18080:8080"
+      # Replay ports
+      # - 49152-65535:49152-65535/udp
+      - 49160-49200:49160-49200/udp
+    volumes:
+      - ./turnserver.conf:/etc/coturn/turnserver.conf
+      - ./data:/var/lib/coturn/
+      - ./db:/var/db/
+      - ./cert.pem:/etc/ssl/cert.pem
+      - ./privkey.pem:/etc/ssl/privkey.pem
+    # network_mode: "host"
+    networks:
+      - devops-network
+    depends_on:
+      - mysql
+
+networks:
+  devops-network:
+    external: true

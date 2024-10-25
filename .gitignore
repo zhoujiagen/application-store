@@ -4,14 +4,17 @@ __pycache__
 .ipynb_checkpoints
 node_modules
 
-########################################################### Benchmark
-# benchmark
-## sysbench
+########################################################### 
+# Benchmark
+###########################################################
+# sysbench
 benchmark/sysbench/lua
 benchmark/sysbench/sysbench-tpcc
 
 
-########################################################### Data Engineering
+########################################################### 
+# Data Engineering
+###########################################################
 # activemq
 data-engineering/activemq/data/*
 !data-engineering/activemq/data/.gitkeep
@@ -135,7 +138,9 @@ data-engineering/tinkerpop/server-conf/conf/*
 data-engineering/vector/bytebase
 data-engineering/vector/logs
 
-########################################################### Ops
+########################################################### 
+# Ops
+###########################################################
 # archery
 
 # artipie
@@ -149,8 +154,15 @@ ops/conductor/conductor.mwb.bak
 # coredns
 ops/coredns/etcd-data
 
+# corturn
+ops/coturn/corturn
+ops/coturn/mysql-data
+
 # flowable
 ops/flowable/data
+
+# freeswitch
+ops/freeswitch/freeswitch
 
 # harbor
 ops/harbor/harbor-offline-installer-v2.10.1.tgz

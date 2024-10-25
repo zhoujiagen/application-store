@@ -27,6 +27,7 @@ Environments:
 | [Apache ActiveMQ Artemis](./data-engineering/activemq/README.md)                       | `stomp.py`                            |
 | [Apache Airflow](./data-engineering/airflow/README.md)                                 | TODO                                  |
 | [Apache Cassandra](./data-engineering/cassandra/README.md)                             | CQL                                   |
+| [Ceph](./data-engineering/ceph/README.md)                                              | TODO                                  |
 | [Apache Flink](./data-engineering/flink/README.md)                                     | Python                                |
 | [Apache Hadoop](./data-engineering/hadoop/README.md)                                   | pydoop                                |
 | [Apache Kafka](./data-engineering/kafka/README.md)                                     | Python, Scala                         |
@@ -59,8 +60,10 @@ Environments:
 | [Archery](./ops/archery/README.md)              | Fix bugs                        |
 | [Conductor](./ops/conductor/README.md)          | Python                          |
 | [CoreDNS](./ops/coredns/README.md)              | `etcd` plugin, `dig`            |
+| [Coturn](./ops/coturn/README.md)                | TODO: WebRTC                    |
 | [Envoy](./ops/envoy/README.md)                  | MongoDB, httpbin, JWT Auth      |
 | [Flowable REST](./ops/flowable/README.md)       | -                               |
+| [FreeSWITCH](./ops/freeswitch/README.md)        | TODO: RIP, Conference           |
 | [Harbor](./ops/harbor/README.md)                | None                            |
 | [Istio](./ops/istio/README.md)                  | bookinfo                        |
 | [Jaeger](./ops/jaeger/README.md)                | Python                          |
