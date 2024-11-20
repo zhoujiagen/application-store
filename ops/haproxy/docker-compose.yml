@@ -1,0 +1,24 @@
+services:
+  haproxy :
+    image: haproxy:3.0.6
+    container_name: haproxy
+    restart: unless-stopped
+    # restart: no
+    privileged: true
+    sysctls:
+      - net.ipv4.ip_unprivileged_port_start=0
+    ports:
+      - 8888:80 # HTTP
+      - 8889:81 # TCP
+      - 20936:20936 # stats UI
+      - 9999:9999 # stats socket
+    volumes:
+      - ./conf/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    # for check configuration file
+    #command: ["haproxy", "-f", "/usr/local/etc/haproxy/haproxy.cfg", "-c"]
+    networks:
+      - devops-network
+
+networks:
+  devops-network:
+    external: true

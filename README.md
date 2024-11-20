@@ -64,6 +64,7 @@ Environments:
 | [Envoy](./ops/envoy/README.md)                  | MongoDB, httpbin, JWT Auth      |
 | [Flowable REST](./ops/flowable/README.md)       | -                               |
 | [FreeSWITCH](./ops/freeswitch/README.md)        | TODO: RIP, Conference           |
+| [HAProxy](./ops/haproxy/README.md)              | HTTP, TCP, stats                |
 | [Harbor](./ops/harbor/README.md)                | None                            |
 | [Istio](./ops/istio/README.md)                  | bookinfo                        |
 | [Jaeger](./ops/jaeger/README.md)                | Python                          |
@@ -88,11 +89,12 @@ Environments:
 
 ## Testing
 
-| Application                                          | Examples   |
-| :--------------------------------------------------- | :--------- |
-| [Flask](./testing/flask/README.md)                   | JSON       |
-| [MailHog](./testing/mailhog/README.md)               | `sendmail` |
-| [Testcontainers](./testing/testcontainers/README.md) | Python     |
+| Application                                          | Examples    |
+| :--------------------------------------------------- | :---------- |
+| [Flask](./testing/flask/README.md)                   | JSON        |
+| [TCP](./testing/tcp-echo/README.md)                  | Echo server |
+| [MailHog](./testing/mailhog/README.md)               | `sendmail`  |
+| [Testcontainers](./testing/testcontainers/README.md) | Python      |
 
 ## Applications
 
